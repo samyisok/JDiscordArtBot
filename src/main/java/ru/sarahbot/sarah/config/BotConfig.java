@@ -1,8 +1,11 @@
 package ru.sarahbot.sarah.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.reactive.function.client.WebClient;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -32,6 +35,12 @@ public class BotConfig {
                     Commands.slash("ping", "Calculate ping of the bot")).queue();
 
         return jda;
+    }
+
+
+    @Bean
+    public WebClient webClient() {
+        return WebClient.builder().build();
     }
 
 }

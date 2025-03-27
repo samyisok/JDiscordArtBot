@@ -1,13 +1,21 @@
 package ru.sarahbot.sarah.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ch.qos.logback.core.util.StringUtil;
+import net.dv8tion.jda.api.entities.Message.Attachment;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.session.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import ru.sarahbot.sarah.file.service.FileUploadService;
 
 @Service
 public class EventProcessor extends ListenerAdapter {
+
+    @Autowired
+    private FileUploadService fileUploadService;
+
 
     @Override
     public void onReady(ReadyEvent event) {
@@ -41,10 +49,13 @@ public class EventProcessor extends ListenerAdapter {
 
         String content = event.getMessage().getContentRaw();
 
-        // Simple "ping" command
-        if (content.equalsIgnoreCase("ping")) {
-            event.getChannel().sendMessage("pong!").queue();
+        switch (content) {
+            case "addhelp" -> fileUploadService.uploadFileFromMessage(event);
+            case "ping" -> event.getChannel().sendMessage("pong!").queue();
+            default -> System.out.println("ough");
         }
+
+
 
         // You can add more conditions here for other commands
     }
