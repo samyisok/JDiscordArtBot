@@ -18,12 +18,12 @@ import ru.sarahbot.sarah.file.service.FileService;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class FileSendService implements MessageGeneratorInterface {
+public class FileSendExecuterService implements ExecuterGeneratorInterface {
     private final FileService fileService;
     private static final Set<String> MESSAGES = Set.of("!help", "!херп", "!хелп");
 
     @Override
-    public Boolean isMessageAvailable(String message) {
+    public Boolean isExecuterAvailable(String message) {
         return MESSAGES.contains(message);
     }
 

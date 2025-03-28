@@ -9,11 +9,11 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 @Slf4j
 @Service
-public class PingService implements MessageGeneratorInterface {
+public class PingExecuterService implements ExecuterGeneratorInterface {
     private static final Set<String> MESSAGES = Set.of("!ping", "!пинг");
 
     @Override
-    public Boolean isMessageAvailable(String message) {
+    public Boolean isExecuterAvailable(String message) {
        return MESSAGES.contains(message);
     }
 

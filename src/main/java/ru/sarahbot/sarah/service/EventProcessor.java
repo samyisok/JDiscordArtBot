@@ -10,15 +10,15 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.session.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import ru.sarahbot.sarah.service.generator.FileSendService;
-import ru.sarahbot.sarah.service.generator.FileUploadService;
-import ru.sarahbot.sarah.service.generator.MessageGeneratorInterface;
+import ru.sarahbot.sarah.service.generator.DefaultExecuterService;
+import ru.sarahbot.sarah.service.generator.ExecuterGeneratorInterface;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class EventProcessor extends ListenerAdapter {
-    private final List<MessageGeneratorInterface> messageExecutersList;
+    private final List<ExecuterGeneratorInterface> messageExecutersList;
+    private final DefaultExecuterService defaultExecuterService;
 
     @Override
     public void onReady(ReadyEvent event) {
@@ -43,9 +43,11 @@ public class EventProcessor extends ListenerAdapter {
         }
     }
 
-    private MessageGeneratorInterface getExecuter(String message) {
+    private ExecuterGeneratorInterface getExecuter(String message) {
         return messageExecutersList.stream()
-                .filter(exe -> exe.isMessageAvailable(message)).findFirst().orElse(null);
+                .filter(exe -> exe.isExecuterAvailable(message))
+                .findFirst()
+                .orElse(defaultExecuterService);
     }
 
     @Override

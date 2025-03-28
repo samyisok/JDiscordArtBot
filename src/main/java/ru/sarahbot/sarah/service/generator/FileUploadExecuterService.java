@@ -2,11 +2,10 @@ package ru.sarahbot.sarah.service.generator;
 
 import java.util.Set;
 import java.util.UUID;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.entities.Message;
@@ -20,7 +19,7 @@ import ru.sarahbot.sarah.file.service.FileService;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class FileUploadService implements MessageGeneratorInterface {
+public class FileUploadExecuterService implements ExecuterGeneratorInterface {
     private final FileService fileService;
 
     @Value("${validations.file.namesize.max:64}")
@@ -33,7 +32,7 @@ public class FileUploadService implements MessageGeneratorInterface {
     private static final Set<String> MESSAGES = Set.of("!addhelp");
 
     @Override
-    public Boolean isMessageAvailable(String message) {
+    public Boolean isExecuterAvailable(String message) {
         return MESSAGES.contains(message);
     }
 
