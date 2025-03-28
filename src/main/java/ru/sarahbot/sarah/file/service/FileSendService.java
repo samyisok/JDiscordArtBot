@@ -8,6 +8,8 @@ import java.nio.file.StandardOpenOption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.utils.FileUpload;
@@ -15,9 +17,9 @@ import ru.sarahbot.sarah.file.dto.FileEntity;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class FileSendService {
-    @Autowired
-    private FileService fileService;
+    private final FileService fileService;
 
     public void sendRandomImage(MessageReceivedEvent event) {
         FileEntity file = fileService.getRandom();

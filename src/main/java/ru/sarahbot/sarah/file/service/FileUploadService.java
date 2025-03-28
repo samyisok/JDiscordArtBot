@@ -5,6 +5,9 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.Message.Attachment;
@@ -15,10 +18,9 @@ import ru.sarahbot.sarah.exception.ValidationInputException;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class FileUploadService {
-
-    @Autowired
-    private FileService fileService;
+    private final FileService fileService;
 
     @Value("${validations.file.namesize.max:64}")
     private Long maxFileName;

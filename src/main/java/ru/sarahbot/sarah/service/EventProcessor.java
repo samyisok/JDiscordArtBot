@@ -1,7 +1,8 @@
 package ru.sarahbot.sarah.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -12,13 +13,10 @@ import ru.sarahbot.sarah.file.service.FileUploadService;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class EventProcessor extends ListenerAdapter {
-
-    @Autowired
-    private FileUploadService fileUploadService;
-
-    @Autowired
-    private FileSendService fileSendService;
+    private final FileUploadService fileUploadService;
+    private final FileSendService fileSendService;
 
     @Override
     public void onReady(ReadyEvent event) {

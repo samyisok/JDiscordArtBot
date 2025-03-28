@@ -6,22 +6,22 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.security.MessageDigest;
 import java.util.HexFormat;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
+
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import reactor.core.publisher.Mono;
 import ru.sarahbot.sarah.exception.ValidationInputException;
 import ru.sarahbot.sarah.file.dto.ResponseDto;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class FileDownloadService {
-    @Autowired
-    private WebClient webClient;
+    private final WebClient webClient;
 
     @Value("${file.save.path}")
     private String saveDirectory;
