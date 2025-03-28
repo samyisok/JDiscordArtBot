@@ -1,11 +1,10 @@
 package ru.sarahbot.sarah.config;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;
+
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -20,9 +19,12 @@ public class BotConfig {
     @Value("${jda.botkey}")
     private String token;
 
+    @Value("${file.size.max:8000000}")
+    private Integer maxFileSize;
+
     @Bean
     public JDA jda(EventProcessor eventProcessor) throws InterruptedException {
-            JDA jda = JDABuilder.createDefault(token)
+        JDA jda = JDABuilder.createDefault(token)
                 .addEventListeners(eventProcessor)
                 .enableIntents(GatewayIntent.MESSAGE_CONTENT)
                 .setStatus(OnlineStatus.ONLINE)
@@ -30,17 +32,18 @@ public class BotConfig {
                 .build()
                 .awaitReady(); // waits until bot is ready
 
-
-            jda.updateCommands().addCommands(
-                    Commands.slash("ping", "Calculate ping of the bot")).queue();
+        jda.updateCommands().addCommands(
+                Commands.slash("ping", "Calculate ping of the bot")).queue();
 
         return jda;
     }
 
-
     @Bean
     public WebClient webClient() {
-        return WebClient.builder().build();
+        return WebClient.builder()
+                .codecs(conf -> conf.defaultCodecs()
+                        .maxInMemorySize(maxFileSize))
+                .build();
     }
 
 }

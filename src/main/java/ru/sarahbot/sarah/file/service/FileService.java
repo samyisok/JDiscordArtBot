@@ -31,6 +31,10 @@ public class FileService {
         return fileRepository.findAll();
     }
 
+    public FileEntity getRandom() {
+        return fileRepository.findRandomFileEntity();
+    }
+
     public void saveFile(String fileName, User user, String contentType, Integer fileSize,
             Attachment attachment, String extension, UUID uuid) {
         String url = getUrl(attachment);
@@ -47,7 +51,7 @@ public class FileService {
         fileEntity.setUuid(uuid.toString());
         fileEntity.setPath(file.getPath());
             
-        log.info("Trying to save file:", fileEntity);
+        log.info("Trying to save file: {}", fileEntity);
         fileRepository.save(fileEntity);
     }
 

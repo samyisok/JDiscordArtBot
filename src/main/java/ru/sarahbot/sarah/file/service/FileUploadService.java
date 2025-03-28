@@ -47,13 +47,11 @@ public class FileUploadService {
             UUID uuid = UUID.randomUUID();
             String extension = getExtension(contentType);
 
-            log.info("saving the file with data: ", fileName, user, contentType, fileSize, attachment, extension, uuid);
-
+            log.info("saving the file with data: {}, {}, {}, {}, {}, {}, {}", fileName, user,
+                    contentType, fileSize, attachment, extension, uuid);
 
             fileService.saveFile(fileName, user, contentType, fileSize, attachment, extension, uuid);
         }
-
-
     }
 
     void validateName(String fileName) {

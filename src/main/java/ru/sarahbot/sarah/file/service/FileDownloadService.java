@@ -15,6 +15,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 import ru.sarahbot.sarah.exception.ValidationInputException;
+import ru.sarahbot.sarah.file.dto.ResponseDto;
 
 @Slf4j
 @Service
@@ -26,35 +27,43 @@ public class FileDownloadService {
     private String saveDirectory;
 
     // max size of free files
-    @Value("${validationsfile.file.size.max:8000000}")
+    @Value("${file.size.max:8000000}")
     private Long maxFileSize;
 
     public File downloadAndSave(String url, String contentType, String extension, String username) {
+        log.info("Starting to download: {}, {}, {}, {}", url, contentType, extension, username);
+
         if (url == null || url.isEmpty() || contentType == null) {
             throw new ValidationInputException("wrong url");
         }
 
-        ClientResponse response = webClient.get().uri(url).exchangeToMono(Mono::just).block();
+        ResponseDto responseDto = webClient.get()
+                .uri(url)
+                .exchangeToMono(res -> {
+                    log.info("Status Code is: {}", res.statusCode());
 
-        if (response == null || response.headers() == null) {
-            throw new ValidationInputException("wrong response");
-        }
+                    HttpHeaders headers = res.headers().asHttpHeaders();
+                    return res.bodyToMono(byte[].class).map(bytes -> new ResponseDto(bytes, headers));
+                }).block();
 
-        HttpHeaders headers = response.headers().asHttpHeaders();
+        HttpHeaders headers = responseDto.headers();
+
+        log.info("Get headers: {}", headers);
 
         var type = headers.getContentType();
 
         if (!type.toString().equals(contentType)) {
             throw new ValidationInputException("wrong type");
         }
-        
+
         if (headers.getContentLength() < 1 || headers.getContentLength() > maxFileSize) {
             throw new ValidationInputException("wrong size");
         }
 
-        byte[] imageBytes = response.bodyToMono(byte[].class).block();
+        byte[] imageBytes = responseDto.bodyBytes();
 
         if (imageBytes == null || imageBytes.length > maxFileSize) {
+            log.error("size of the file {}, but limit is {}", imageBytes.length, maxFileSize);
             throw new ValidationInputException("wrong size");
         }
 
@@ -67,19 +76,17 @@ public class FileDownloadService {
             }
         }
 
-
         String sha = getSha1Hex(imageBytes);
         String filename = "" + sha + "_" + username + "." + extension;
         File file = new File(dir, filename);
         try (FileOutputStream fos = new FileOutputStream(file)) {
             fos.write(imageBytes);
         } catch (Exception e) {
-            log.error("failed to save file",filename, e);
+            log.error("failed to save file {}, {}", filename, e);
         }
 
         return file;
     }
-
 
     String getSha1Hex(byte[] data) {
         try {
@@ -89,6 +96,5 @@ public class FileDownloadService {
             throw new RuntimeException("Failed sha generation");
         }
     }
-
 
 }
