@@ -1,5 +1,7 @@
 package ru.sarahbot.sarah.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -8,22 +10,21 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.session.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import ru.sarahbot.sarah.file.service.FileSendService;
-import ru.sarahbot.sarah.file.service.FileUploadService;
+import ru.sarahbot.sarah.service.generator.FileSendService;
+import ru.sarahbot.sarah.service.generator.FileUploadService;
+import ru.sarahbot.sarah.service.generator.MessageGeneratorInterface;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class EventProcessor extends ListenerAdapter {
-    private final FileUploadService fileUploadService;
-    private final FileSendService fileSendService;
+    private final List<MessageGeneratorInterface> messageExecutersList;
 
     @Override
     public void onReady(ReadyEvent event) {
         System.out.println(
                 "✅ Bot is ready! Logged in as: " + event.getJDA().getSelfUser().getAsTag());
     }
-
 
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
@@ -42,6 +43,11 @@ public class EventProcessor extends ListenerAdapter {
         }
     }
 
+    private MessageGeneratorInterface getExecuter(String message) {
+        return messageExecutersList.stream()
+                .filter(exe -> exe.isMessageAvailable(message)).findFirst().orElse(null);
+    }
+
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         // Ignore bot messages
@@ -52,11 +58,6 @@ public class EventProcessor extends ListenerAdapter {
 
         log.info("Get event:{}", content);
 
-        switch (content) {
-            case "!addhelp" -> fileUploadService.uploadFileFromMessage(event);
-            case "!ping" -> event.getChannel().sendMessage("pong!").queue();
-            case "!help" -> fileSendService.sendRandomImage(event);
-            default -> System.out.println("ough");
-        }
+        getExecuter(content).execute(event);
     }
 }

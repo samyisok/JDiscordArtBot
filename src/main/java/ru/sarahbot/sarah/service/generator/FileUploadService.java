@@ -1,4 +1,4 @@
-package ru.sarahbot.sarah.file.service;
+package ru.sarahbot.sarah.service.generator;
 
 import java.util.Set;
 import java.util.UUID;
@@ -15,11 +15,12 @@ import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import ru.sarahbot.sarah.exception.MessageRuntimeException;
 import ru.sarahbot.sarah.exception.ValidationInputException;
+import ru.sarahbot.sarah.file.service.FileService;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class FileUploadService {
+public class FileUploadService implements MessageGeneratorInterface {
     private final FileService fileService;
 
     @Value("${validations.file.namesize.max:64}")
@@ -29,11 +30,18 @@ public class FileUploadService {
     @Value("${validationsfile.file.size.max:8000000}")
     private Long maxFileSize;
 
-    public void uploadFileFromMessage(MessageReceivedEvent event) {
+    private static final Set<String> MESSAGES = Set.of("!addhelp");
+
+    @Override
+    public Boolean isMessageAvailable(String message) {
+        return MESSAGES.contains(message);
+    }
+
+    @Override
+    public void execute(MessageReceivedEvent event) {
         if (event == null) {
             throw new MessageRuntimeException("Event is null");
         }
-
 
         User user = event.getAuthor();
         Message message = event.getMessage();
