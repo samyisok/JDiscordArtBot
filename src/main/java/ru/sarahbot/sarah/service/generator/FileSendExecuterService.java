@@ -32,17 +32,18 @@ public class FileSendExecuterService implements ExecuterGeneratorInterface {
         FileEntity file = fileService.getRandom();
         log.info("get random file {}", file);
 
-        try {
-            FileUpload prepFiles = getPrepFiles(file);
-            log.info("Prepered inputsream for file: {}", file.getName());
-            event.getChannel().sendMessage("Держите Херп!").addFiles(prepFiles).queue();
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to get the file");
-        }
+        FileUpload prepFiles = getPrepFiles(file);
+        log.info("Prepered inputsream for file: {}", file.getName());
+        event.getChannel().sendMessage("Держите Херп!").addFiles(prepFiles).queue();
+
     }
 
-    FileUpload getPrepFiles(FileEntity file) throws IOException {
-        InputStream istream = Files.newInputStream(Path.of(file.getPath()), StandardOpenOption.READ);
-        return FileUpload.fromData(istream, file.getName());
+    FileUpload getPrepFiles(FileEntity file) {
+        try {
+            InputStream istream = Files.newInputStream(Path.of(file.getPath()), StandardOpenOption.READ);
+            return FileUpload.fromData(istream, file.getName());
+        } catch (IOException e) {
+            throw new RuntimeException("Error creating File Stream");
+        }
     }
 }

@@ -4,10 +4,9 @@ import java.io.File;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.entities.Message.Attachment;
@@ -47,13 +46,13 @@ public class FileService {
         fileEntity.setSize(fileSize.longValue());
         fileEntity.setUuid(uuid.toString());
         fileEntity.setPath(file.getPath());
-            
+
         log.info("Trying to save file: {}", fileEntity);
         fileRepository.save(fileEntity);
     }
 
     private String getUrl(Attachment attachment) {
-        if(attachment == null || attachment.getUrl() == null || attachment.getUrl().isEmpty()) {
+        if (attachment == null || attachment.getUrl() == null || attachment.getUrl().isEmpty()) {
             throw new ValidationInputException("Wrong file Url");
         }
 
