@@ -31,7 +31,7 @@ public class FileService {
         return fileRepository.findRandomFileEntity();
     }
 
-    public void saveFile(String fileName, User user, String contentType, Integer fileSize,
+    public void saveFile(String fileName, User user, String contentType,
             Attachment attachment, String extension, UUID uuid) {
         String url = getUrl(attachment);
 
@@ -43,7 +43,7 @@ public class FileService {
         fileEntity.setOrigName(fileName);
         fileEntity.setUsername(user.getGlobalName());
         fileEntity.setType(contentType);
-        fileEntity.setSize(fileSize.longValue());
+        fileEntity.setSize(file.length());
         fileEntity.setUuid(uuid.toString());
         fileEntity.setPath(file.getPath());
 

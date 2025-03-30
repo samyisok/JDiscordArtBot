@@ -53,14 +53,18 @@ public class FileUploadExecuterService implements ExecuterGeneratorInterface {
             validateName(fileName);
             validateContentType(contentType);
             validateSize(fileSize);
-            UUID uuid = UUID.randomUUID();
+            UUID uuid = getUuid();
             String extension = getExtension(contentType);
 
             log.info("saving the file with data: {}, {}, {}, {}, {}, {}, {}", fileName, user,
                     contentType, fileSize, attachment, extension, uuid);
 
-            fileService.saveFile(fileName, user, contentType, fileSize, attachment, extension, uuid);
+            fileService.saveFile(fileName, user, contentType, attachment, extension, uuid);
         }
+    }
+
+    UUID getUuid() {
+        return UUID.randomUUID();
     }
 
     void validateName(String fileName) {
@@ -76,7 +80,7 @@ public class FileUploadExecuterService implements ExecuterGeneratorInterface {
     }
 
     void validateSize(Integer fileSize) {
-        if (fileSize == null || fileSize.intValue() == 0
+        if (fileSize == null || fileSize.intValue() <= 0
         // if maxSize less than filesize then throw an exception
                 || maxFileSize.compareTo(fileSize.longValue()) < 0) {
             throw new ValidationInputException("Wrong file size");
