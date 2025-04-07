@@ -10,8 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan
 public class SarahApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SarahApplication.class, args);
-	}
-
+  public static void main(String[] args) {
+    SpringApplication.run(SarahApplication.class, args);
+  }
 }
