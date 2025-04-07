@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatException;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import java.util.UUID;
@@ -37,7 +36,7 @@ public class FileUploadExecuterServiceTest {
 
   @BeforeEach
   void before() {
-    ReflectionTestUtils.setField(fileUploadExecuterService, "maxFileSize", 8000000L);
+    ReflectionTestUtils.setField(fileUploadExecuterService, "maxFileSize", 10000000L);
     ReflectionTestUtils.setField(fileUploadExecuterService, "maxFileName", 64L);
 
     uuid = UUID.randomUUID();
@@ -55,7 +54,7 @@ public class FileUploadExecuterServiceTest {
     verify(fileUploadExecuterService).validateContentType(MockJdaEvent.IMAGE_JPEG);
     verify(fileUploadExecuterService).validateSize(MockJdaEvent.SIZE);
 
-    verify(fileUploadExecuterService, times(2)).getExtension(MockJdaEvent.IMAGE_JPEG);
+    verify(fileUploadExecuterService).getExtension(MockJdaEvent.IMAGE_JPEG);
 
     verify(fileService)
         .saveFile(
@@ -63,7 +62,6 @@ public class FileUploadExecuterServiceTest {
             context.user(),
             MockJdaEvent.IMAGE_JPEG,
             context.attachments().getFirst(),
-            "jpg",
             uuid);
   }
 

@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import ru.sarahbot.sarah.exception.ValidationInputException;
@@ -25,11 +26,11 @@ public class FileDownloadService {
   private String saveDirectory;
 
   // max size of free files
-  @Value("${file.size.max:8000000}")
+  @Value("${file.size.max:10000000}")
   private Long maxFileSize;
 
-  public File downloadAndSave(String url, String contentType, String extension, String username) {
-    log.info("Starting to download: {}, {}, {}, {}", url, contentType, extension, username);
+  public File downloadAndSave(String url, String contentType, String username) {
+    log.info("Starting to download: {}, {}, {}, {}", url, contentType, username);
 
     if (url == null || url.isEmpty() || contentType == null) {
       throw new ValidationInputException("wrong url");
@@ -52,8 +53,22 @@ public class FileDownloadService {
 
     log.info("Get headers: {}", headers);
 
-    var type = headers.getContentType();
+    MediaType type = headers.getContentType();
+    byte[] imageBytes = responseDto.bodyBytes();
 
+    validate(contentType, headers, type, imageBytes);
+
+    String extension = getExtension(contentType);
+    File file = getFile(extension, username, imageBytes);
+
+    return file;
+  }
+
+  private String getExtension(String contentType) {
+    return ExtensionUtils.getExtension(contentType);
+  }
+
+  void validate(String contentType, HttpHeaders headers, MediaType type, byte[] imageBytes) {
     if (!type.toString().equals(contentType)) {
       throw new ValidationInputException("wrong type");
     }
@@ -62,13 +77,13 @@ public class FileDownloadService {
       throw new ValidationInputException("wrong size");
     }
 
-    byte[] imageBytes = responseDto.bodyBytes();
-
     if (imageBytes == null || imageBytes.length > maxFileSize) {
       log.error("size of the file {}, but limit is {}", imageBytes.length, maxFileSize);
       throw new ValidationInputException("wrong size");
     }
+  }
 
+  private File getFile(String extension, String username, byte[] imageBytes) {
     File dir = new File(saveDirectory);
     if (!dir.exists()) {
       try {
@@ -86,7 +101,6 @@ public class FileDownloadService {
     } catch (Exception e) {
       log.error("failed to save file {}, {}", filename, e);
     }
-
     return file;
   }
 

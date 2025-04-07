@@ -30,16 +30,10 @@ public class FileService {
   }
 
   public void saveFile(
-      String fileName,
-      User user,
-      String contentType,
-      Attachment attachment,
-      String extension,
-      UUID uuid) {
+      String fileName, User user, String contentType, Attachment attachment, UUID uuid) {
     String url = getUrl(attachment);
 
-    File file =
-        fileDownloadService.downloadAndSave(url, contentType, extension, user.getGlobalName());
+    File file = fileDownloadService.downloadAndSave(url, contentType, user.getGlobalName());
 
     FileEntity fileEntity = new FileEntity();
     fileEntity.setCdate(LocalDateTime.now());

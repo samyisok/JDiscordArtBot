@@ -18,7 +18,7 @@ public class BotConfig {
   @Value("${jda.botkey}")
   private String token;
 
-  @Value("${file.size.max:8000000}")
+  @Value("${file.size.max:10000000}")
   private Integer maxFileSize;
 
   @Bean

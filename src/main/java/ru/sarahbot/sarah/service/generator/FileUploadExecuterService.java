@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.sarahbot.sarah.exception.MessageRuntimeException;
 import ru.sarahbot.sarah.exception.ValidationInputException;
+import ru.sarahbot.sarah.file.service.ExtensionUtils;
 import ru.sarahbot.sarah.file.service.FileService;
 
 @Slf4j
@@ -24,7 +25,7 @@ public class FileUploadExecuterService implements ExecuterGeneratorInterface {
   private Long maxFileName;
 
   // max size of free files
-  @Value("${validationsfile.file.size.max:8000000}")
+  @Value("${validationsfile.file.size.max:10000000}")
   private Long maxFileSize;
 
   private static final Set<String> MESSAGES = Set.of("!addhelp");
@@ -52,7 +53,6 @@ public class FileUploadExecuterService implements ExecuterGeneratorInterface {
       validateContentType(contentType);
       validateSize(fileSize);
       UUID uuid = getUuid();
-      String extension = getExtension(contentType);
 
       log.info(
           "saving the file with data: {}, {}, {}, {}, {}, {}, {}",
@@ -61,10 +61,9 @@ public class FileUploadExecuterService implements ExecuterGeneratorInterface {
           contentType,
           fileSize,
           attachment,
-          extension,
           uuid);
 
-      fileService.saveFile(fileName, user, contentType, attachment, extension, uuid);
+      fileService.saveFile(fileName, user, contentType, attachment, uuid);
     }
   }
 
@@ -94,10 +93,6 @@ public class FileUploadExecuterService implements ExecuterGeneratorInterface {
   }
 
   String getExtension(String contentType) {
-    return switch (contentType) {
-      case "image/jpeg" -> "jpg";
-      case "image/png" -> "png";
-      default -> null;
-    };
+    return ExtensionUtils.getExtension(contentType);
   }
 }
