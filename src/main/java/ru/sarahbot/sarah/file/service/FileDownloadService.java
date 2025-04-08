@@ -6,13 +6,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.security.MessageDigest;
 import java.util.HexFormat;
+import java.util.function.Function;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 import ru.sarahbot.sarah.exception.ValidationInputException;
 import ru.sarahbot.sarah.file.dto.ResponseDto;
 
@@ -20,96 +23,105 @@ import ru.sarahbot.sarah.file.dto.ResponseDto;
 @Service
 @RequiredArgsConstructor
 public class FileDownloadService {
-  private final WebClient webClient;
+    private final WebClient webClient;
 
-  @Value("${file.save.path}")
-  private String saveDirectory;
+    @Value("${file.save.path}")
+    private String saveDirectory;
 
-  // max size of free files
-  @Value("${file.size.max:10000000}")
-  private Long maxFileSize;
+    // max size of free files
+    @Value("${file.size.max:10000000}")
+    private Long maxFileSize;
 
-  public File downloadAndSave(String url, String contentType, String username) {
-    log.info("Starting to download: {}, {}, {}, {}", url, contentType, username);
+    public File downloadAndSave(String url, String contentType, String username) {
+        log.info("Starting to download: {}, {}, {}, {}", url, contentType, username);
 
-    if (url == null || url.isEmpty() || contentType == null) {
-      throw new ValidationInputException("wrong url");
+        if (url == null || url.isEmpty() || contentType == null || username == null) {
+            throw new ValidationInputException("wrong params");
+        }
+
+        ResponseDto responseDto = getResponseDto(url, getResponseFunc());
+
+        HttpHeaders headers = responseDto.headers();
+        log.info("Get headers: {}", headers);
+
+        byte[] imageBytes = responseDto.bodyBytes();
+
+        validate(contentType, headers, imageBytes);
+
+        String extension = getExtension(contentType);
+        return saveFileToFs(extension, username, imageBytes);
     }
 
-    ResponseDto responseDto =
-        webClient
-            .get()
-            .uri(url)
-            .exchangeToMono(
-                res -> {
-                  log.info("Status Code is: {}", res.statusCode());
-
-                  HttpHeaders headers = res.headers().asHttpHeaders();
-                  return res.bodyToMono(byte[].class).map(bytes -> new ResponseDto(bytes, headers));
-                })
-            .block();
-
-    HttpHeaders headers = responseDto.headers();
-
-    log.info("Get headers: {}", headers);
-
-    MediaType type = headers.getContentType();
-    byte[] imageBytes = responseDto.bodyBytes();
-
-    validate(contentType, headers, type, imageBytes);
-
-    String extension = getExtension(contentType);
-    File file = getFile(extension, username, imageBytes);
-
-    return file;
-  }
-
-  private String getExtension(String contentType) {
-    return ExtensionUtils.getExtension(contentType);
-  }
-
-  void validate(String contentType, HttpHeaders headers, MediaType type, byte[] imageBytes) {
-    if (!type.toString().equals(contentType)) {
-      throw new ValidationInputException("wrong type");
+    ResponseDto getResponseDto(
+            String url, Function<ClientResponse, ? extends Mono<ResponseDto>> responseFunc) {
+        ResponseDto responseDto = webClient.get().uri(url).exchangeToMono(responseFunc).block();
+        return responseDto;
     }
 
-    if (headers.getContentLength() < 1 || headers.getContentLength() > maxFileSize) {
-      throw new ValidationInputException("wrong size");
+    Function<ClientResponse, ? extends Mono<ResponseDto>> getResponseFunc() {
+        return res -> {
+            log.info("Status Code is: {}", res.statusCode());
+
+            HttpHeaders headers = res.headers().asHttpHeaders();
+            return res.bodyToMono(byte[].class).map(bytes -> new ResponseDto(bytes, headers));
+        };
     }
 
-    if (imageBytes == null || imageBytes.length > maxFileSize) {
-      log.error("size of the file {}, but limit is {}", imageBytes.length, maxFileSize);
-      throw new ValidationInputException("wrong size");
-    }
-  }
-
-  private File getFile(String extension, String username, byte[] imageBytes) {
-    File dir = new File(saveDirectory);
-    if (!dir.exists()) {
-      try {
-        Files.createDirectories(dir.toPath());
-      } catch (IOException e) {
-        throw new RuntimeException("Failed IO");
-      }
+    String getExtension(String contentType) {
+        return ExtensionUtils.getExtension(contentType);
     }
 
-    String sha = getSha1Hex(imageBytes);
-    String filename = "" + sha + "_" + username + "." + extension;
-    File file = new File(dir, filename);
-    try (FileOutputStream fos = new FileOutputStream(file)) {
-      fos.write(imageBytes);
-    } catch (Exception e) {
-      log.error("failed to save file {}, {}", filename, e);
-    }
-    return file;
-  }
+    void validate(String contentType, HttpHeaders headers, byte[] imageBytes) {
+        if (headers == null || imageBytes == null || contentType == null || headers.getContentType() == null) {
+            throw new ValidationInputException("null in data");
+        }
 
-  String getSha1Hex(byte[] data) {
-    try {
-      MessageDigest sha = MessageDigest.getInstance("SHA-1");
-      return HexFormat.of().formatHex(sha.digest(data));
-    } catch (Exception e) {
-      throw new RuntimeException("Failed sha generation");
+        if (!contentType.toString().equals(headers.getContentType().toString())) {
+            throw new ValidationInputException("wrong type");
+        }
+
+        if (headers.getContentLength() < 1 || headers.getContentLength() > maxFileSize) {
+            throw new ValidationInputException("wrong size");
+        }
+
+        if (imageBytes == null || imageBytes.length > maxFileSize) {
+            log.error("size of the file {}, but limit is {}", imageBytes.length, maxFileSize);
+            throw new ValidationInputException("wrong size");
+        }
     }
-  }
+
+    File saveFileToFs(String extension, String username, byte[] imageBytes) {
+        if (extension == null || username == null || imageBytes == null) {
+            throw new ValidationInputException("Null input params");
+        }
+
+        File dir = new File(saveDirectory);
+        if (!dir.exists()) {
+            try {
+                Files.createDirectories(dir.toPath());
+            } catch (IOException e) {
+                throw new RuntimeException("Failed IO");
+            }
+        }
+
+        String sha = getSha1Hex(imageBytes);
+        String filename = "" + sha + "_" + username + "." + extension;
+        File file = new File(dir, filename);
+        try (FileOutputStream fos = new FileOutputStream(file)) {
+            fos.write(imageBytes);
+        } catch (Exception e) {
+            log.error("failed to save file {}, {}", filename, e);
+        }
+
+        return file;
+    }
+
+    String getSha1Hex(byte[] data) {
+        try {
+            MessageDigest sha = MessageDigest.getInstance("SHA-1");
+            return HexFormat.of().formatHex(sha.digest(data));
+        } catch (Exception e) {
+            throw new RuntimeException("Failed sha generation");
+        }
+    }
 }
