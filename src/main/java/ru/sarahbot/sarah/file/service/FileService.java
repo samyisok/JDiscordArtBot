@@ -18,42 +18,42 @@ import ru.sarahbot.sarah.file.repository.FileRepository;
 @RequiredArgsConstructor
 public class FileService {
 
-  private final FileRepository fileRepository;
-  private final FileDownloadService fileDownloadService;
+    private final FileRepository fileRepository;
+    private final FileDownloadService fileDownloadService;
 
-  public List<FileEntity> getAll() {
-    return fileRepository.findAll();
-  }
-
-  public FileEntity getRandom() {
-    return fileRepository.findRandomFileEntity();
-  }
-
-  public void saveFile(
-      String fileName, User user, String contentType, Attachment attachment, UUID uuid) {
-    String url = getUrl(attachment);
-
-    File file = fileDownloadService.downloadAndSave(url, contentType, user.getGlobalName());
-
-    FileEntity fileEntity = new FileEntity();
-    fileEntity.setCdate(LocalDateTime.now());
-    fileEntity.setName(file.getName());
-    fileEntity.setOrigName(fileName);
-    fileEntity.setUsername(user.getGlobalName());
-    fileEntity.setType(contentType);
-    fileEntity.setSize(file.length());
-    fileEntity.setUuid(uuid.toString());
-    fileEntity.setPath(file.getPath());
-
-    log.info("Trying to save file: {}", fileEntity);
-    fileRepository.save(fileEntity);
-  }
-
-  private String getUrl(Attachment attachment) {
-    if (attachment == null || attachment.getUrl() == null || attachment.getUrl().isEmpty()) {
-      throw new ValidationInputException("Wrong file Url");
+    public List<FileEntity> getAll() {
+        return fileRepository.findAll();
     }
 
-    return attachment.getUrl().trim().replaceAll("[<>]", "");
-  }
+    public FileEntity getRandom() {
+        return fileRepository.findRandomFileEntity();
+    }
+
+    public void saveFile(
+            String fileName, User user, String contentType, Attachment attachment, UUID uuid) {
+        String url = getUrl(attachment);
+
+        File file = fileDownloadService.downloadAndSave(url, contentType, user.getGlobalName());
+
+        FileEntity fileEntity = new FileEntity();
+        fileEntity.setCdate(LocalDateTime.now());
+        fileEntity.setName(file.getName());
+        fileEntity.setOrigName(fileName);
+        fileEntity.setUsername(user.getGlobalName());
+        fileEntity.setType(contentType);
+        fileEntity.setSize(file.length());
+        fileEntity.setUuid(uuid.toString());
+        fileEntity.setPath(file.getPath());
+
+        log.info("Trying to save file: {}", fileEntity);
+        fileRepository.save(fileEntity);
+    }
+
+    String getUrl(Attachment attachment) {
+        if (attachment == null || attachment.getUrl() == null || attachment.getUrl().isEmpty()) {
+            throw new ValidationInputException("Wrong file Url");
+        }
+
+        return attachment.getUrl().trim().replaceAll("[<>]", "");
+    }
 }
