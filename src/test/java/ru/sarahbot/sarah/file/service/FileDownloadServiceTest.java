@@ -13,6 +13,7 @@ import static org.mockito.Mockito.when;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.function.Function;
@@ -33,8 +34,10 @@ import org.mockito.quality.Strictness;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.util.ReflectionTestUtils;
+import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import reactor.core.publisher.Mono;
 import ru.sarahbot.sarah.file.dto.ResponseDto;
 import ru.sarahbot.sarah.service.MockWebClient;
 
@@ -200,6 +203,24 @@ public class FileDownloadServiceTest {
 
     @Test
     void testGetResponseFunc() {
+        doCallRealMethod().when(fileDownloadService).getResponseFunc();
+        Function<ClientResponse, ? extends Mono<ResponseDto>> func = fileDownloadService.getResponseFunc();
+
+        assertThat(func).isNotNull();
+
+        ClientResponse clientResponse = mock(ClientResponse.class);
+        ClientResponse.Headers headers = mock(ClientResponse.Headers.class);
+        when(headers.asHttpHeaders()).thenReturn(httpHeaders);
+        when(clientResponse.headers()).thenReturn(headers);
+        byte[] content = "hello".getBytes(StandardCharsets.UTF_8);
+        Mono<byte[]> monoRes = Mono.just(content);
+        when(clientResponse.bodyToMono(byte[].class)).thenReturn(monoRes);
+
+        Mono<ResponseDto> res = func.apply(clientResponse);
+        ResponseDto responseDto = res.block();
+
+        assertThat(responseDto.bodyBytes()).isEqualTo(content);
+        assertThat(responseDto.headers()).isEqualTo(httpHeaders);
 
     }
 }
