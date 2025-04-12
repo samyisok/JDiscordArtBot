@@ -72,8 +72,10 @@ public class EventProcessor extends ListenerAdapter {
 
         Thread.ofVirtual()
                 .name("onMessageReceived_"
-                        + event.getAuthor().getGlobalName().trim().replace(" ", "_")
                         + "_" + uuid.toString())
                 .start(() -> executor.execute(event));
+        log.error("executer: {}, event: {}, {}, {}, {}", executor.getClass().getCanonicalName(),
+                event.getAuthor().getGlobalName(),
+                event.getChannel().getName(), event.getGuild().getName(), event.getMessage().getContentDisplay());
     }
 }
