@@ -86,7 +86,7 @@ public class FileUploadExecuterServiceTest {
     }
 
     @ParameterizedTest
-    @CsvSource({ "image/jpeg, jpg", "image/png, png", "anything,," })
+    @CsvSource({ "image/jpeg, jpg", "image/png, png", "image/gif, gif", "anything,," })
     void testGetExtension(String input, String expected) {
         assertThat(fileUploadExecuterService.getExtension(input)).isEqualTo(expected);
     }
