@@ -18,30 +18,30 @@ import ru.sarahbot.sarah.file.service.FileService;
 @Service
 @RequiredArgsConstructor
 public class FileSendExecuterService implements ExecuterGeneratorInterface {
-  private final FileService fileService;
-  private static final Set<String> MESSAGES = Set.of("!help", "!херп", "!хелп");
+    private final FileService fileService;
+    private static final Set<String> MESSAGES = Set.of("!help", "!херп", "!хелп");
 
-  @Override
-  public Boolean isExecuterAvailable(String message) {
-    return MESSAGES.contains(message);
-  }
-
-  @Override
-  public void execute(MessageReceivedEvent event) {
-    FileEntity file = fileService.getRandom();
-    log.info("get random file {}", file);
-
-    FileUpload prepFiles = getPrepFiles(file);
-    log.info("Prepered inputsream for file: {}", file.getName());
-    event.getChannel().sendMessage("Держите Херп!").addFiles(prepFiles).queue();
-  }
-
-  FileUpload getPrepFiles(FileEntity file) {
-    try {
-      InputStream istream = Files.newInputStream(Path.of(file.getPath()), StandardOpenOption.READ);
-      return FileUpload.fromData(istream, file.getName());
-    } catch (IOException e) {
-      throw new RuntimeException("Error creating File Stream");
+    @Override
+    public Boolean isExecuterAvailable(String message) {
+        return MESSAGES.contains(message);
     }
-  }
+
+    @Override
+    public void execute(MessageReceivedEvent event) {
+        FileEntity file = fileService.getRandom();
+        log.info("get random file {}", file);
+
+        FileUpload prepFiles = getPrepFiles(file);
+        log.info("Prepered inputsream for file: {}", file.getName());
+        event.getChannel().sendMessage("Держите Херп!").addFiles(prepFiles).queue();
+    }
+
+    FileUpload getPrepFiles(FileEntity file) {
+        try {
+            InputStream istream = Files.newInputStream(Path.of(file.getPath()), StandardOpenOption.READ);
+            return FileUpload.fromData(istream, file.getName());
+        } catch (IOException e) {
+            throw new RuntimeException("Error creating File Stream");
+        }
+    }
 }

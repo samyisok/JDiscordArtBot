@@ -1,0 +1,40 @@
+18:46:02.743 Starting SarahApplication using Java 21.0.6 with PID 15016 (C:\Mega\draw\project\sarah\target\classes started by magas in C:\Mega\draw\project\sarah)
+18:46:02.743 No active profile set, falling back to 1 default profile: "default"
+18:46:03.560 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+18:46:03.599 Finished Spring Data repository scanning in 36 ms. Found 1 JPA repository interface.
+18:46:03.932 Tomcat initialized with port 8080 (http)
+18:46:03.934 Initializing ProtocolHandler ["http-nio-8080"]
+18:46:03.935 Starting service [Tomcat]
+18:46:03.936 Starting Servlet engine: [Apache Tomcat/10.1.39]
+18:46:04.012 Initializing Spring embedded WebApplicationContext
+18:46:04.013 Root WebApplicationContext: initialization completed in 1263 ms
+18:46:04.377 HHH000204: Processing PersistenceUnitInfo [name: default]
+18:46:04.382 HHH000026: Second-level cache disabled
+18:46:04.399 No LoadTimeWeaver setup: ignoring JPA class transformer
+18:46:04.401 HikariPool-2 - Starting...
+18:46:04.417 HikariPool-2 - Added connection conn10: url=jdbc:h2:file:./data/mydb user=SA
+18:46:04.418 HikariPool-2 - Start completed.
+18:46:04.420 HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+18:46:04.421 HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-2)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+18:46:04.508 HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+18:46:04.511 Initialized JPA EntityManagerFactory for persistence unit 'default'
+18:46:05.200 Login Successful!
+18:46:05.620 Connected to WebSocket
+18:46:05.926 Finished Loading!
+18:46:06.136 spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+18:46:06.776 H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/mydb'
+18:46:06.834 LiveReload server is running on port 35729
+18:46:06.848 Exposing 1 endpoint beneath base path '/actuator'
+18:46:06.900 Starting ProtocolHandler ["http-nio-8080"]
+18:46:06.913 Tomcat started on port 8080 (http) with context path '/'
+18:46:06.927 Started SarahApplication in 4.257 seconds (process running for 204.675)
+18:46:06.934 Condition evaluation unchanged
+18:47:12.902 Get event: 7ff45fa2-14cb-4f78-acd5-bcc8ae09e41e, !тест лололо
+18:47:12.905 Unexpected call of default executer, event: SS, general, High_Shinkai_Labs, !тест лололо

@@ -1,6 +1,8 @@
 package ru.sarahbot.sarah.service;
 
 import java.util.List;
+import java.util.UUID;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -15,53 +17,63 @@ import ru.sarahbot.sarah.service.generator.ExecuterGeneratorInterface;
 @Service
 @RequiredArgsConstructor
 public class EventProcessor extends ListenerAdapter {
-  private final List<ExecuterGeneratorInterface> messageExecutersList;
-  private final DefaultExecuterService defaultExecuterService;
+    private final List<ExecuterGeneratorInterface> messageExecutersList;
+    private final DefaultExecuterService defaultExecuterService;
 
-  @Override
-  public void onReady(ReadyEvent event) {
-    System.out.println("✅ Bot is ready! Logged in as: " + event.getJDA().getSelfUser().getAsTag());
-  }
-
-  @Override
-  public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
-    // make sure we handle the right command
-    switch (event.getName()) {
-      case "ping":
-        long time = System.currentTimeMillis();
-        event
-            .reply("Pong!")
-            .setEphemeral(true) // reply or acknowledge
-            .flatMap(
-                v ->
-                    event
-                        .getHook()
-                        .editOriginalFormat(
-                            "Pong: %d ms", System.currentTimeMillis() - time) // then edit original
-                )
-            .queue(); // Queue both reply and edit
-        break;
-      default:
-        System.out.printf("Unknown command %s used by %#s%n", event.getName(), event.getUser());
+    @Override
+    public void onReady(ReadyEvent event) {
+        System.out.println("✅ Bot is ready! Logged in as: " + event.getJDA().getSelfUser().getAsTag());
     }
-  }
 
-  private ExecuterGeneratorInterface getExecuter(String message) {
-    return messageExecutersList.stream()
-        .filter(exe -> exe.isExecuterAvailable(message))
-        .findFirst()
-        .orElse(defaultExecuterService);
-  }
+    @Override
+    public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
+        // make sure we handle the right command
+        switch (event.getName()) {
+            case "ping":
+                long time = System.currentTimeMillis();
+                event
+                        .reply("Pong!")
+                        .setEphemeral(true) // reply or acknowledge
+                        .flatMap(
+                                v -> event
+                                        .getHook()
+                                        .editOriginalFormat(
+                                                "Pong: %d ms", System.currentTimeMillis() - time) // then edit original
+                        )
+                        .queue(); // Queue both reply and edit
+                break;
+            default:
+                System.out.printf("Unknown command %s used by %#s%n", event.getName(), event.getUser());
+        }
+    }
 
-  @Override
-  public void onMessageReceived(MessageReceivedEvent event) {
-    // Ignore bot messages
-    if (event.getAuthor().isBot()) return;
+    private ExecuterGeneratorInterface getExecuter(String message) {
+        return messageExecutersList.stream()
+                .filter(exe -> exe.isExecuterAvailable(message))
+                .findFirst()
+                .orElse(defaultExecuterService);
+    }
 
-    String content = event.getMessage().getContentRaw();
+    @Override
+    public void onMessageReceived(MessageReceivedEvent event) {
+        String content = event.getMessage().getContentRaw();
+        // Ignore bot messages
+        if (event.getAuthor() == null
+                || !content.startsWith("!")
+                || event.getAuthor().isBot()
+                || event.getAuthor().getGlobalName() == null) {
+            return;
+        }
 
-    log.info("Get event:{}", content);
+        UUID uuid = UUID.randomUUID();
 
-    getExecuter(content).execute(event);
-  }
+        log.info("Get event: {}, {}", uuid.toString(), content);
+        ExecuterGeneratorInterface executor = getExecuter(content);
+
+        Thread.ofVirtual()
+                .name("onMessageReceived_"
+                        + event.getAuthor().getGlobalName().trim().replace(" ", "_")
+                        + "_" + uuid.toString())
+                .start(() -> executor.execute(event));
+    }
 }

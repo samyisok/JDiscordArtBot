@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.Message.Attachment;
+import net.dv8tion.jda.api.entities.emoji.Emoji;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,80 +20,82 @@ import ru.sarahbot.sarah.file.service.FileService;
 @Service
 @RequiredArgsConstructor
 public class FileUploadExecuterService implements ExecuterGeneratorInterface {
-  private final FileService fileService;
+    private final FileService fileService;
 
-  @Value("${validations.file.namesize.max:64}")
-  private Long maxFileName;
+    @Value("${validations.file.namesize.max:64}")
+    private Long maxFileName;
 
-  // max size of free files
-  @Value("${validationsfile.file.size.max:10000000}")
-  private Long maxFileSize;
+    // max size of free files
+    @Value("${validationsfile.file.size.max:10000000}")
+    private Long maxFileSize;
 
-  private static final Set<String> MESSAGES = Set.of("!addhelp");
+    private static final Set<String> MESSAGES = Set.of("!addhelp");
 
-  @Override
-  public Boolean isExecuterAvailable(String message) {
-    return MESSAGES.contains(message);
-  }
-
-  @Override
-  public void execute(MessageReceivedEvent event) {
-    if (event == null) {
-      throw new MessageRuntimeException("Event is null");
+    @Override
+    public Boolean isExecuterAvailable(String message) {
+        return MESSAGES.contains(message);
     }
 
-    User user = event.getAuthor();
-    Message message = event.getMessage();
-    if (message != null) {
-      Attachment attachment = message.getAttachments().getFirst();
-      String contentType = attachment.getContentType();
-      String fileName = attachment.getFileName();
-      Integer fileSize = attachment.getSize();
+    @Override
+    public void execute(MessageReceivedEvent event) {
+        if (event == null) {
+            throw new MessageRuntimeException("Event is null");
+        }
 
-      validateName(fileName);
-      validateContentType(contentType);
-      validateSize(fileSize);
-      UUID uuid = getUuid();
+        User user = event.getAuthor();
+        Message message = event.getMessage();
+        if (message != null) {
+            Attachment attachment = message.getAttachments().getFirst();
+            String contentType = attachment.getContentType();
+            String fileName = attachment.getFileName();
+            Integer fileSize = attachment.getSize();
 
-      log.info(
-          "saving the file with data: {}, {}, {}, {}, {}, {}, {}",
-          fileName,
-          user,
-          contentType,
-          fileSize,
-          attachment,
-          uuid);
+            validateName(fileName);
+            validateContentType(contentType);
+            validateSize(fileSize);
+            UUID uuid = getUuid();
 
-      fileService.saveFile(fileName, user, contentType, attachment, uuid);
+            log.info(
+                    "saving the file with data: {}, {}, {}, {}, {}, {}, {}",
+                    fileName,
+                    user,
+                    contentType,
+                    fileSize,
+                    attachment,
+                    uuid);
+
+            fileService.saveFile(fileName, user, contentType, attachment, uuid);
+
+            event.getMessage().addReaction(Emoji.fromUnicode("✅")).queue();
+        }
     }
-  }
 
-  UUID getUuid() {
-    return UUID.randomUUID();
-  }
-
-  void validateName(String fileName) {
-    if (fileName == null || fileName.isEmpty() || fileName.length() > maxFileName) {
-      throw new ValidationInputException("Wrong File Name");
+    UUID getUuid() {
+        return UUID.randomUUID();
     }
-  }
 
-  void validateContentType(String contentType) {
-    if (contentType == null || contentType.isEmpty() || getExtension(contentType) == null) {
-      throw new ValidationInputException("Wrong File Name");
+    void validateName(String fileName) {
+        if (fileName == null || fileName.isEmpty() || fileName.length() > maxFileName) {
+            throw new ValidationInputException("Wrong File Name");
+        }
     }
-  }
 
-  void validateSize(Integer fileSize) {
-    if (fileSize == null
-        || fileSize.intValue() <= 0
-        // if maxSize less than filesize then throw an exception
-        || maxFileSize.compareTo(fileSize.longValue()) < 0) {
-      throw new ValidationInputException("Wrong file size");
+    void validateContentType(String contentType) {
+        if (contentType == null || contentType.isEmpty() || getExtension(contentType) == null) {
+            throw new ValidationInputException("Wrong File Name");
+        }
     }
-  }
 
-  String getExtension(String contentType) {
-    return ExtensionUtils.getExtension(contentType);
-  }
+    void validateSize(Integer fileSize) {
+        if (fileSize == null
+                || fileSize.intValue() <= 0
+                // if maxSize less than filesize then throw an exception
+                || maxFileSize.compareTo(fileSize.longValue()) < 0) {
+            throw new ValidationInputException("Wrong file size");
+        }
+    }
+
+    String getExtension(String contentType) {
+        return ExtensionUtils.getExtension(contentType);
+    }
 }

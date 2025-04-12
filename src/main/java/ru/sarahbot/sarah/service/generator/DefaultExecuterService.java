@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class DefaultExecuterService implements ExecuterGeneratorInterface {
-  @Override
-  public Boolean isExecuterAvailable(String message) {
-    return false;
-  }
+    @Override
+    public Boolean isExecuterAvailable(String message) {
+        return false;
+    }
 
-  @Override
-  public void execute(MessageReceivedEvent event) {
-    log.error("Unexpected call of default executer, event: {}", event);
-    ;
-  }
+    @Override
+    public void execute(MessageReceivedEvent event) {
+        log.error("Unexpected call of default executer, event: {}, {}, {}, {}", event.getAuthor().getGlobalName(),
+                event.getChannel().getName(), event.getGuild().getName(), event.getMessage().getContentDisplay());
+    }
 }
