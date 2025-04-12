@@ -12,7 +12,7 @@ public class DefinerExecuterService implements ExecuterGeneratorInterface {
 
     private static final Set<String> MESSAGES = Set.of("!это", "!эта", "!эти", "!%");
 
-    private static final Set<String> ANSWERS = Set.of(
+    static final Set<String> ANSWERS = Set.of(
             "Да",
             "Нет",
             "Скорее да",

@@ -36,6 +36,7 @@ public class MockJdaEvent {
         when(message.getContentRaw()).thenReturn(command);
         when(message.getAttachments()).thenReturn(attachments);
         when(message.addReaction(any())).thenReturn(restAction);
+        when(message.reply(anyString())).thenReturn(messageCreateAction);
         when(messageReceivedEvent.getMessage()).thenReturn(message);
         when(messageReceivedEvent.getChannel()).thenReturn(messageChannelUnion);
         when(user.getGlobalName()).thenReturn(USER_NAME);
