@@ -38,3 +38,91 @@
 18:46:06.934 Condition evaluation unchanged
 18:47:12.902 Get event: 7ff45fa2-14cb-4f78-acd5-bcc8ae09e41e, !тест лололо
 18:47:12.905 Unexpected call of default executer, event: SS, general, High_Shinkai_Labs, !тест лололо
+17:24:05.273 Starting SarahApplicationTests using Java 21.0.6 with PID 2664 (started by magas in C:\Mega\draw\project\sarah)
+17:24:05.275 No active profile set, falling back to 1 default profile: "default"
+17:24:08.021 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+17:24:08.391 Finished Spring Data repository scanning in 347 ms. Found 1 JPA repository interface.
+17:24:10.198 HHH000204: Processing PersistenceUnitInfo [name: default]
+17:24:10.439 HHH000412: Hibernate ORM core version 6.6.11.Final
+17:24:10.563 HHH000026: Second-level cache disabled
+17:24:11.750 No LoadTimeWeaver setup: ignoring JPA class transformer
+17:24:11.823 HikariPool-1 - Starting...
+17:24:12.286 HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/mydb user=SA
+17:24:12.290 HikariPool-1 - Start completed.
+17:24:12.345 HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+17:24:12.393 HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+17:24:13.931 HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+17:24:14.023 Initialized JPA EntityManagerFactory for persistence unit 'default'
+17:24:16.008 Hibernate is in classpath; If applicable, HQL parser will be used.
+17:24:18.083 Login Successful!
+17:24:18.526 Connected to WebSocket
+17:24:18.938 Finished Loading!
+17:24:20.223 spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+17:24:23.828 H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/mydb'
+17:24:24.006 Exposing 1 endpoint beneath base path '/actuator'
+17:24:24.311 Started SarahApplicationTests in 19.944 seconds (process running for 22.155)
+17:24:31.315 saving the file with data: filename.jpg, Mock for User, hashCode: 1178485051, image/jpeg, 1000, Mock for Attachment, hashCode: 599550369, 86255efa-2717-4beb-8557-53ee7ff0deca, {}
+17:24:32.158 get random file FileEntity(id=1, name=name, origName=null, path=./pathname, type=null, hash=null, cdate=null, uuid=null, username=null, size=null)
+17:24:32.185 Prepered inputsream for file: name
+17:24:33.534 Trying to save file: FileEntity(id=null, name=filename, origName=test.jpg, path=./path, type=image/jpeg, hash=null, cdate=2025-04-13T17:24:33.532637500, uuid=d23e177b-006f-444b-9d4b-1e5ab6efa892, username=usernameGlobal, size=10)
+17:24:35.895 Starting to download: null, image/jpeg, username, {}
+17:24:35.902 Starting to download: /url, null, username, {}
+17:24:35.908 Starting to download: /url, image/jpeg, null, {}
+17:24:36.262 Status Code is: null
+17:24:36.391 Starting to download: /url, image/jpeg, username, {}
+17:24:36.395 Get headers: Mock for HttpHeaders, hashCode: 428769242
+17:24:37.435 size of the file 10000001, but limit is 10000000
+17:24:37.668 Closing JPA EntityManagerFactory for persistence unit 'default'
+17:24:37.680 HikariPool-1 - Shutdown initiated...
+17:24:37.692 HikariPool-1 - Shutdown completed.
+20:53:55.104 Starting SarahApplicationTests using Java 21.0.6 with PID 23520 (started by magas in C:\code\project3\sarah)
+20:53:55.105 No active profile set, falling back to 1 default profile: "default"
+20:53:56.285 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+20:53:56.458 Finished Spring Data repository scanning in 163 ms. Found 1 JPA repository interface.
+20:53:57.316 HHH000204: Processing PersistenceUnitInfo [name: default]
+20:53:57.415 HHH000412: Hibernate ORM core version 6.6.11.Final
+20:53:57.465 HHH000026: Second-level cache disabled
+20:53:57.958 No LoadTimeWeaver setup: ignoring JPA class transformer
+20:53:57.988 HikariPool-1 - Starting...
+20:53:58.246 HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/mydb user=SA
+20:53:58.248 HikariPool-1 - Start completed.
+20:53:58.276 HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+20:53:58.302 HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+20:53:59.130 HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+20:53:59.185 Initialized JPA EntityManagerFactory for persistence unit 'default'
+20:54:00.159 Hibernate is in classpath; If applicable, HQL parser will be used.
+20:54:01.450 Login Successful!
+20:54:01.846 Connected to WebSocket
+20:54:02.189 Finished Loading!
+20:54:02.691 spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+20:54:04.138 H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/mydb'
+20:54:04.215 Exposing 1 endpoint beneath base path '/actuator'
+20:54:04.360 Started SarahApplicationTests in 9.679 seconds (process running for 10.753)
+20:54:06.175 get random file FileEntity(id=1, name=name, origName=null, path=./pathname, type=null, hash=null, cdate=null, uuid=null, username=null, size=null)
+20:54:06.186 Prepered inputsream for file: name
+20:54:06.707 saving the file with data: filename.jpg, Mock for User, hashCode: 1229304415, image/jpeg, 1000, Mock for Attachment, hashCode: 465197128, 5915f4d5-2790-4101-a02f-2a2166057339, {}
+20:54:07.331 Trying to save file: FileEntity(id=null, name=filename, origName=test.jpg, path=./path, type=image/jpeg, hash=null, cdate=2025-04-13T20:54:07.330086100, uuid=d23e177b-006f-444b-9d4b-1e5ab6efa892, username=usernameGlobal, size=10)
+20:54:07.853 Starting to download: null, image/jpeg, username, {}
+20:54:07.855 Starting to download: /url, null, username, {}
+20:54:07.856 Starting to download: /url, image/jpeg, null, {}
+20:54:07.941 Status Code is: null
+20:54:08.038 Starting to download: /url, image/jpeg, username, {}
+20:54:08.038 Get headers: Mock for HttpHeaders, hashCode: 2040790818
+20:54:08.332 size of the file 10000001, but limit is 10000000
+20:54:08.422 Closing JPA EntityManagerFactory for persistence unit 'default'
+20:54:08.427 HikariPool-1 - Shutdown initiated...
+20:54:08.431 HikariPool-1 - Shutdown completed.

@@ -23,7 +23,7 @@ public class DefinerExecuterServiceTest {
 
     @Spy
     @InjectMocks
-    DefinerExecuterService definerExecuterService;
+    private DefinerExecuterService definerExecuterService;
 
     @ParameterizedTest
     @CsvSource({ "!это точно, true", "!эти, true", "!эта, true", "!%, true,", "!help, false" })
