@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.utils.FileUpload;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.sarahbot.sarah.file.dto.FileEntity;
 import ru.sarahbot.sarah.file.service.FileService;
@@ -18,6 +20,9 @@ import ru.sarahbot.sarah.file.service.FileService;
 @Service
 @RequiredArgsConstructor
 public class FileSendExecuterService implements ExecuterGeneratorInterface {
+    @Value("${file.save.path}")
+    private String saveDirectory;
+
     private final FileService fileService;
     private static final Set<String> MESSAGES = Set.of("!help", "!херп", "!хелп");
 
@@ -38,7 +43,7 @@ public class FileSendExecuterService implements ExecuterGeneratorInterface {
 
     FileUpload getPrepFiles(FileEntity file) {
         try {
-            InputStream istream = Files.newInputStream(Path.of(file.getPath()), StandardOpenOption.READ);
+            InputStream istream = Files.newInputStream(Path.of(saveDirectory, file.getName()), StandardOpenOption.READ);
             return FileUpload.fromData(istream, file.getName());
         } catch (IOException e) {
             throw new RuntimeException("Error creating File Stream");

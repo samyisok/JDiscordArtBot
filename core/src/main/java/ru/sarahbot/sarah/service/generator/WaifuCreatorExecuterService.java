@@ -1,0 +1,33 @@
+package ru.sarahbot.sarah.service.generator;
+
+import java.util.Set;
+
+import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import ru.sarahbot.sarah.file.service.WaifuCreatorService;
+
+@Slf4j
+@Service
+@RequiredArgsConstructor
+public class WaifuCreatorExecuterService implements ExecuterGeneratorInterface {
+
+    private static final Set<String> MESSAGES = Set.of("!waifu");
+    private final WaifuCreatorService waifuCreatorService;
+
+    @Override
+    public Boolean isExecuterAvailable(String message) {
+        return MESSAGES.contains(message);
+    }
+
+    @Override
+    public void execute(MessageReceivedEvent event) {
+
+        String waifu = waifuCreatorService.generate();
+
+        event.getMessage().reply(waifu).queue();
+    }
+
+}

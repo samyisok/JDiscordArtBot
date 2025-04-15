@@ -74,7 +74,7 @@ public class EventProcessor extends ListenerAdapter {
                 .name("onMessageReceived_"
                         + "_" + uuid.toString())
                 .start(() -> executor.execute(event));
-        log.error("executer: {}, event: {}, {}, {}, {}", executor.getClass().getCanonicalName(),
+        log.info("executer: {}, event: {}, {}, {}, {}", executor.getClass().getCanonicalName(),
                 event.getAuthor().getGlobalName(),
                 event.getChannel().getName(), event.getGuild().getName(), event.getMessage().getContentDisplay());
     }

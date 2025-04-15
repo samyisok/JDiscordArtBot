@@ -11,17 +11,22 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
+
 import net.dv8tion.jda.api.utils.FileUpload;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.io.TempDir;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+import org.springframework.test.util.ReflectionTestUtils;
+
 import ru.sarahbot.sarah.file.dto.FileEntity;
 import ru.sarahbot.sarah.file.service.FileService;
 import ru.sarahbot.sarah.service.MockJdaEvent;
@@ -31,71 +36,81 @@ import ru.sarahbot.sarah.service.MockJdaEvent.MockedEventContext;
 @MockitoSettings(strictness = Strictness.LENIENT)
 public class FileSendExecuterServiceTest {
 
-  @Mock FileService fileService;
+    private static final String TEST_NAME = "testName";
 
-  @Spy @InjectMocks FileSendExecuterService fileSendExecuterService;
+    @Mock
+    FileService fileService;
 
-  FileEntity fileEntity;
-  FileUpload fileUpload;
+    @Spy
+    @InjectMocks
+    FileSendExecuterService fileSendExecuterService;
 
-  @BeforeEach
-  void before() {
-    fileEntity = new FileEntity();
-    fileEntity.setId(1L);
-    fileEntity.setName("name");
-    fileEntity.setPath("./pathname");
+    FileEntity fileEntity;
+    FileUpload fileUpload;
 
-    fileUpload = mock(FileUpload.class);
+    @TempDir
+    Path tempDir;
 
-    doReturn(fileUpload).when(fileSendExecuterService).getPrepFiles(fileEntity);
+    @BeforeEach
+    void before() {
+        ReflectionTestUtils.setField(fileSendExecuterService, "saveDirectory", tempDir.toString());
 
-    when(fileService.getRandom()).thenReturn(fileEntity);
-  }
+        fileEntity = new FileEntity();
+        fileEntity.setId(1L);
+        fileEntity.setName("name");
+        fileEntity.setPath("./pathname");
 
-  @Test
-  void testExecute() {
-    MockedEventContext event = MockJdaEvent.mockMessageEvent("!help");
+        fileUpload = mock(FileUpload.class);
 
-    fileSendExecuterService.execute(event.messageReceivedEvent());
+        doReturn(fileUpload).when(fileSendExecuterService).getPrepFiles(fileEntity);
 
-    verify(fileService).getRandom();
-    verify(fileSendExecuterService).getPrepFiles(fileEntity);
-    verify(event.messageReceivedEvent()).getChannel();
-    verify(event.messageChannelUnion()).sendMessage("Держите Херп!");
-    verify(event.messageCreateAction()).addFiles(fileUpload);
-    verify(event.messageCreateAction()).queue();
-  }
+        when(fileService.getRandom()).thenReturn(fileEntity);
+    }
 
-  @Test
-  void testGetPrepFiles() throws IOException {
-    String content = "test content";
+    @Test
+    void testExecute() {
+        MockedEventContext event = MockJdaEvent.mockMessageEvent("!help");
 
-    File temp = File.createTempFile("test", ".txt");
-    Files.writeString(temp.toPath(), content);
+        fileSendExecuterService.execute(event.messageReceivedEvent());
 
-    fileEntity.setName("testName");
-    fileEntity.setPath(temp.getAbsolutePath());
+        verify(fileService).getRandom();
+        verify(fileSendExecuterService).getPrepFiles(fileEntity);
+        verify(event.messageReceivedEvent()).getChannel();
+        verify(event.messageChannelUnion()).sendMessage("Держите Херп!");
+        verify(event.messageCreateAction()).addFiles(fileUpload);
+        verify(event.messageCreateAction()).queue();
+    }
 
-    doCallRealMethod().when(fileSendExecuterService).getPrepFiles(fileEntity);
+    @Test
+    void testGetPrepFiles() throws IOException {
+        String content = "test content";
 
-    FileUpload fileUploadRes = fileSendExecuterService.getPrepFiles(fileEntity);
+        File temp = File.createTempFile("test", ".txt");
+        Files.writeString(Path.of(tempDir.toString(), TEST_NAME), content);
 
-    assertThat(fileUploadRes).isNotNull();
-    assertThat(fileUploadRes.getName()).isEqualTo("testName");
+        fileEntity.setName(TEST_NAME);
+        fileEntity.setPath(temp.getAbsolutePath());
 
-    assertThat(new String(fileUploadRes.getData().readAllBytes(), StandardCharsets.UTF_8))
-        .isEqualTo(content);
-  }
+        doCallRealMethod().when(fileSendExecuterService).getPrepFiles(fileEntity);
 
-  @DisplayName("isExecuterAvailable is true")
-  @Test
-  void testIsExecuterAvailableTrue() {
-    assertThat(fileSendExecuterService.isExecuterAvailable("!help")).isTrue();
-  }
+        FileUpload fileUploadRes = fileSendExecuterService.getPrepFiles(fileEntity);
 
-  @DisplayName("isExecuterAvailable is false")
-  @Test
-  void testIsExecuterAvailableFalse() {
-    assertThat(fileSendExecuterService.isExecuterAvailable("!ping")).isFalse();
-  }
+        assertThat(fileUploadRes).isNotNull();
+        assertThat(fileUploadRes.getName()).isEqualTo(TEST_NAME);
+
+        assertThat(new String(fileUploadRes.getData().readAllBytes(), StandardCharsets.UTF_8))
+                .isEqualTo(content);
+    }
+
+    @DisplayName("isExecuterAvailable is true")
+    @Test
+    void testIsExecuterAvailableTrue() {
+        assertThat(fileSendExecuterService.isExecuterAvailable("!help")).isTrue();
+    }
+
+    @DisplayName("isExecuterAvailable is false")
+    @Test
+    void testIsExecuterAvailableFalse() {
+        assertThat(fileSendExecuterService.isExecuterAvailable("!ping")).isFalse();
+    }
 }

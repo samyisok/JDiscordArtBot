@@ -7,6 +7,15 @@
     </parent>
 
     <artifactId>utils</artifactId>
+    <name>utils</name>
+    <description>Some utils module of Sarah Discord Bot</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>

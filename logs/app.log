@@ -126,3 +126,721 @@
 20:54:08.422 Closing JPA EntityManagerFactory for persistence unit 'default'
 20:54:08.427 HikariPool-1 - Shutdown initiated...
 20:54:08.431 HikariPool-1 - Shutdown completed.
+19:49:15.412 Starting SarahApplication using Java 21.0.6 with PID 27080 (C:\code\project3\sarah\core\target\classes started by magas in C:\code\project3\sarah)
+19:49:15.418 No active profile set, falling back to 1 default profile: "default"
+19:49:15.527 Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+19:49:15.528 For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+19:49:18.007 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+19:49:18.224 Finished Spring Data repository scanning in 197 ms. Found 1 JPA repository interface.
+19:49:19.819 Tomcat initialized with port 8080 (http)
+19:49:19.859 Initializing ProtocolHandler ["http-nio-8080"]
+19:49:19.865 Starting service [Tomcat]
+19:49:19.866 Starting Servlet engine: [Apache Tomcat/10.1.39]
+19:49:19.987 Initializing Spring embedded WebApplicationContext
+19:49:19.988 Root WebApplicationContext: initialization completed in 4458 ms
+19:49:21.004 HHH000204: Processing PersistenceUnitInfo [name: default]
+19:49:21.103 HHH000412: Hibernate ORM core version 6.6.11.Final
+19:49:21.262 HHH000026: Second-level cache disabled
+19:49:21.816 No LoadTimeWeaver setup: ignoring JPA class transformer
+19:49:21.857 HikariPool-1 - Starting...
+19:49:22.109 HikariPool-1 - Added connection conn0: url=jdbc:h2:file:../data/mydb user=SA
+19:49:22.112 HikariPool-1 - Start completed.
+19:49:22.145 HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+19:49:22.172 HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+19:49:23.105 HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+19:49:23.191 Initialized JPA EntityManagerFactory for persistence unit 'default'
+19:49:24.844 Hibernate is in classpath; If applicable, HQL parser will be used.
+19:49:26.546 Login Successful!
+19:49:26.885 Connected to WebSocket
+19:49:27.218 Finished Loading!
+19:49:27.714 spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+19:49:30.380 H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:../data/mydb'
+19:49:30.541 LiveReload server is running on port 35729
+19:49:30.575 Exposing 1 endpoint beneath base path '/actuator'
+19:49:30.824 Starting ProtocolHandler ["http-nio-8080"]
+19:49:30.853 Tomcat started on port 8080 (http) with context path '/'
+19:49:30.875 Started SarahApplication in 16.373 seconds (process running for 17.709)
+19:49:32.680 Initializing Spring DispatcherServlet 'dispatcherServlet'
+19:49:32.680 Initializing Servlet 'dispatcherServlet'
+19:49:32.682 Completed initialization in 2 ms
+19:49:55.131 Get event: 3e2579a9-bf19-45e2-80dc-c891b2adc571, !waifu
+19:49:55.141 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+19:50:10.818 Get event: aafcf5d4-f24c-4a22-be3c-db7b16d66d12, !waifu
+19:50:10.819 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+19:50:28.417 Get event: 8875447a-35ae-4581-ae24-7fc684010c91, !waifu
+19:50:28.418 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+23:57:05.744 Starting SarahApplication using Java 21.0.6 with PID 18880 (C:\code\project3\sarah\core\target\classes started by magas in C:\code\project3\sarah)
+23:57:05.772 No active profile set, falling back to 1 default profile: "default"
+23:57:06.205 Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+23:57:06.209 For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+23:57:16.093 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+23:57:16.946 Finished Spring Data repository scanning in 800 ms. Found 1 JPA repository interface.
+23:57:21.589 Tomcat initialized with port 8080 (http)
+23:57:21.681 Initializing ProtocolHandler ["http-nio-8080"]
+23:57:21.699 Starting service [Tomcat]
+23:57:21.702 Starting Servlet engine: [Apache Tomcat/10.1.39]
+23:57:21.961 Initializing Spring embedded WebApplicationContext
+23:57:21.963 Root WebApplicationContext: initialization completed in 15747 ms
+23:57:24.079 HHH000204: Processing PersistenceUnitInfo [name: default]
+23:57:24.424 HHH000412: Hibernate ORM core version 6.6.11.Final
+23:57:24.742 HHH000026: Second-level cache disabled
+23:57:26.416 No LoadTimeWeaver setup: ignoring JPA class transformer
+23:57:26.553 HikariPool-1 - Starting...
+23:57:27.774 HikariPool-1 - Added connection conn0: url=jdbc:h2:file:../data/mydb user=SA
+23:57:27.781 HikariPool-1 - Start completed.
+23:57:27.914 HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+23:57:28.054 HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+23:57:32.102 HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+23:57:32.426 Initialized JPA EntityManagerFactory for persistence unit 'default'
+23:57:36.677 Hibernate is in classpath; If applicable, HQL parser will be used.
+23:57:41.244 Login Successful!
+23:57:41.838 Connected to WebSocket
+23:57:42.418 Finished Loading!
+23:57:43.473 spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+23:57:45.811 H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:../data/mydb'
+23:57:45.939 LiveReload server is running on port 35729
+23:57:45.966 Exposing 1 endpoint beneath base path '/actuator'
+23:57:46.151 Starting ProtocolHandler ["http-nio-8080"]
+23:57:46.194 Tomcat started on port 8080 (http) with context path '/'
+23:57:46.220 Started SarahApplication in 45.178 seconds (process running for 48.18)
+23:58:14.546 Get event: d608211e-f713-4244-aedf-04cce93fdf84, !waifu
+23:58:14.559 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+23:58:23.847 Get event: 1c77ce03-03c1-4ca0-823b-0d2d8adbd993, !waifu
+23:58:23.848 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: lw, general, High_Shinkai_Labs, !waifu
+23:58:57.584 Get event: f01961d8-bc72-440b-98fb-0effaa32ac12, !waifu
+23:58:57.585 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: lw, general, High_Shinkai_Labs, !waifu
+23:59:12.425 Get event: a5ef86fd-3e13-44b6-8738-e9176b85abb3, !waifu
+23:59:12.426 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: lw, general, High_Shinkai_Labs, !waifu
+23:59:25.232 Get event: 8e161605-84b3-4fda-8740-248a3afd3648, !waifu
+23:59:25.232 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: lw, general, High_Shinkai_Labs, !waifu
+00:00:27.595 Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
+00:00:27.602 Commencing graceful shutdown. Waiting for active requests to complete
+00:00:27.604 Pausing ProtocolHandler ["http-nio-8080"]
+00:00:27.618 Graceful shutdown complete
+00:00:27.619 Stopping ProtocolHandler ["http-nio-8080"]
+00:00:27.656 Closing JPA EntityManagerFactory for persistence unit 'default'
+00:00:27.664 HikariPool-1 - Shutdown initiated...
+00:00:27.678 HikariPool-1 - Shutdown completed.
+00:00:27.899 Starting SarahApplication using Java 21.0.6 with PID 18880 (C:\code\project3\sarah\core\target\classes started by magas in C:\code\project3\sarah)
+00:00:27.901 No active profile set, falling back to 1 default profile: "default"
+00:00:29.092 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+00:00:29.126 Finished Spring Data repository scanning in 30 ms. Found 1 JPA repository interface.
+00:00:29.410 Tomcat initialized with port 8080 (http)
+00:00:29.411 Initializing ProtocolHandler ["http-nio-8080"]
+00:00:29.412 Starting service [Tomcat]
+00:00:29.413 Starting Servlet engine: [Apache Tomcat/10.1.39]
+00:00:29.456 Initializing Spring embedded WebApplicationContext
+00:00:29.457 Root WebApplicationContext: initialization completed in 1542 ms
+00:00:29.636 HHH000204: Processing PersistenceUnitInfo [name: default]
+00:00:29.641 HHH000026: Second-level cache disabled
+00:00:29.654 No LoadTimeWeaver setup: ignoring JPA class transformer
+00:00:29.656 HikariPool-2 - Starting...
+00:00:29.685 HikariPool-2 - Added connection conn10: url=jdbc:h2:file:../data/mydb user=SA
+00:00:29.686 HikariPool-2 - Start completed.
+00:00:29.687 HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+00:00:29.689 HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-2)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+00:00:29.800 HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+00:00:29.804 Initialized JPA EntityManagerFactory for persistence unit 'default'
+00:00:30.456 Login Successful!
+00:00:30.742 Connected to WebSocket
+00:00:31.232 Finished Loading!
+00:00:31.489 spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+00:00:32.287 H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:../data/mydb'
+00:00:32.371 LiveReload server is running on port 35729
+00:00:32.382 Exposing 1 endpoint beneath base path '/actuator'
+00:00:32.429 Starting ProtocolHandler ["http-nio-8080"]
+00:00:32.441 Tomcat started on port 8080 (http) with context path '/'
+00:00:32.457 Started SarahApplication in 4.664 seconds (process running for 214.417)
+00:00:32.469 Condition evaluation unchanged
+00:01:31.252 Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
+00:01:31.257 Commencing graceful shutdown. Waiting for active requests to complete
+00:01:31.259 Pausing ProtocolHandler ["http-nio-8080"]
+00:01:31.275 Graceful shutdown complete
+00:01:31.277 Stopping ProtocolHandler ["http-nio-8080"]
+00:01:31.283 Closing JPA EntityManagerFactory for persistence unit 'default'
+00:01:31.285 HikariPool-2 - Shutdown initiated...
+00:01:31.305 HikariPool-2 - Shutdown completed.
+00:01:31.449 Starting SarahApplication using Java 21.0.6 with PID 18880 (C:\code\project3\sarah\core\target\classes started by magas in C:\code\project3\sarah)
+00:01:31.450 No active profile set, falling back to 1 default profile: "default"
+00:01:32.543 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+00:01:32.573 Finished Spring Data repository scanning in 25 ms. Found 1 JPA repository interface.
+00:01:32.828 Tomcat initialized with port 8080 (http)
+00:01:32.830 Initializing ProtocolHandler ["http-nio-8080"]
+00:01:32.831 Starting service [Tomcat]
+00:01:32.832 Starting Servlet engine: [Apache Tomcat/10.1.39]
+00:01:32.870 Initializing Spring embedded WebApplicationContext
+00:01:32.871 Root WebApplicationContext: initialization completed in 1413 ms
+00:01:33.120 HHH000204: Processing PersistenceUnitInfo [name: default]
+00:01:33.125 HHH000026: Second-level cache disabled
+00:01:33.165 No LoadTimeWeaver setup: ignoring JPA class transformer
+00:01:33.168 HikariPool-3 - Starting...
+00:01:33.212 HikariPool-3 - Added connection conn20: url=jdbc:h2:file:../data/mydb user=SA
+00:01:33.213 HikariPool-3 - Start completed.
+00:01:33.215 HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+00:01:33.217 HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-3)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+00:01:33.327 HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+00:01:33.332 Initialized JPA EntityManagerFactory for persistence unit 'default'
+00:01:34.176 Login Successful!
+00:01:34.469 Connected to WebSocket
+00:01:34.793 Finished Loading!
+00:01:34.979 spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+00:01:35.826 H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:../data/mydb'
+00:01:35.942 LiveReload server is running on port 35729
+00:01:35.956 Exposing 1 endpoint beneath base path '/actuator'
+00:01:36.010 Starting ProtocolHandler ["http-nio-8080"]
+00:01:36.018 Tomcat started on port 8080 (http) with context path '/'
+00:01:36.031 Started SarahApplication in 4.63 seconds (process running for 277.99)
+00:01:36.035 Condition evaluation unchanged
+00:02:09.755 Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
+00:02:09.758 Commencing graceful shutdown. Waiting for active requests to complete
+00:02:09.759 Pausing ProtocolHandler ["http-nio-8080"]
+00:02:09.776 Graceful shutdown complete
+00:02:09.777 Stopping ProtocolHandler ["http-nio-8080"]
+00:02:09.782 Closing JPA EntityManagerFactory for persistence unit 'default'
+00:02:09.783 HikariPool-3 - Shutdown initiated...
+00:02:09.806 HikariPool-3 - Shutdown completed.
+00:02:10.085 Starting SarahApplication using Java 21.0.6 with PID 18880 (C:\code\project3\sarah\core\target\classes started by magas in C:\code\project3\sarah)
+00:02:10.089 No active profile set, falling back to 1 default profile: "default"
+00:02:11.190 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+00:02:11.234 Finished Spring Data repository scanning in 42 ms. Found 1 JPA repository interface.
+00:02:11.643 Tomcat initialized with port 8080 (http)
+00:02:11.645 Initializing ProtocolHandler ["http-nio-8080"]
+00:02:11.647 Starting service [Tomcat]
+00:02:11.648 Starting Servlet engine: [Apache Tomcat/10.1.39]
+00:02:11.703 Initializing Spring embedded WebApplicationContext
+00:02:11.703 Root WebApplicationContext: initialization completed in 1608 ms
+00:02:11.933 HHH000204: Processing PersistenceUnitInfo [name: default]
+00:02:11.943 HHH000026: Second-level cache disabled
+00:02:11.969 No LoadTimeWeaver setup: ignoring JPA class transformer
+00:02:11.973 HikariPool-4 - Starting...
+00:02:12.020 HikariPool-4 - Added connection conn30: url=jdbc:h2:file:../data/mydb user=SA
+00:02:12.022 HikariPool-4 - Start completed.
+00:02:12.023 HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+00:02:12.024 HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-4)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+00:02:12.131 HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+00:02:12.139 Initialized JPA EntityManagerFactory for persistence unit 'default'
+00:02:12.881 Login Successful!
+00:02:13.194 Connected to WebSocket
+00:02:13.457 Finished Loading!
+00:02:13.640 spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+00:02:14.239 H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:../data/mydb'
+00:02:14.284 LiveReload server is running on port 35729
+00:02:14.293 Exposing 1 endpoint beneath base path '/actuator'
+00:02:14.332 Starting ProtocolHandler ["http-nio-8080"]
+00:02:14.339 Tomcat started on port 8080 (http) with context path '/'
+00:02:14.346 Started SarahApplication in 4.384 seconds (process running for 316.305)
+00:02:14.350 Condition evaluation unchanged
+00:02:24.645 Get event: 7b6bb33b-82b9-4fbf-b8af-6178d2bee1a5, !waifu
+00:02:24.648 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:03:38.949 Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
+00:03:38.950 Commencing graceful shutdown. Waiting for active requests to complete
+00:03:38.951 Pausing ProtocolHandler ["http-nio-8080"]
+00:03:38.956 Graceful shutdown complete
+00:03:38.956 Stopping ProtocolHandler ["http-nio-8080"]
+00:03:38.960 Closing JPA EntityManagerFactory for persistence unit 'default'
+00:03:38.961 HikariPool-4 - Shutdown initiated...
+00:03:38.966 HikariPool-4 - Shutdown completed.
+00:03:39.047 Starting SarahApplication using Java 21.0.6 with PID 18880 (C:\code\project3\sarah\core\target\classes started by magas in C:\code\project3\sarah)
+00:03:39.047 No active profile set, falling back to 1 default profile: "default"
+00:03:39.348 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+00:03:39.358 Finished Spring Data repository scanning in 8 ms. Found 1 JPA repository interface.
+00:03:39.510 Tomcat initialized with port 8080 (http)
+00:03:39.511 Initializing ProtocolHandler ["http-nio-8080"]
+00:03:39.512 Starting service [Tomcat]
+00:03:39.512 Starting Servlet engine: [Apache Tomcat/10.1.39]
+00:03:39.537 Initializing Spring embedded WebApplicationContext
+00:03:39.537 Root WebApplicationContext: initialization completed in 487 ms
+00:03:39.626 HHH000204: Processing PersistenceUnitInfo [name: default]
+00:03:39.628 HHH000026: Second-level cache disabled
+00:03:39.636 No LoadTimeWeaver setup: ignoring JPA class transformer
+00:03:39.640 HikariPool-5 - Starting...
+00:03:39.661 HikariPool-5 - Added connection conn40: url=jdbc:h2:file:../data/mydb user=SA
+00:03:39.662 HikariPool-5 - Start completed.
+00:03:39.662 HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+00:03:39.663 HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-5)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+00:03:39.706 HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+00:03:39.709 Initialized JPA EntityManagerFactory for persistence unit 'default'
+00:03:41.033 Login Successful!
+00:03:41.450 Connected to WebSocket
+00:03:41.849 Finished Loading!
+00:03:41.931 spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+00:03:42.208 H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:../data/mydb'
+00:03:42.236 LiveReload server is running on port 35729
+00:03:42.241 Exposing 1 endpoint beneath base path '/actuator'
+00:03:42.262 Starting ProtocolHandler ["http-nio-8080"]
+00:03:42.267 Tomcat started on port 8080 (http) with context path '/'
+00:03:42.272 Started SarahApplication in 3.251 seconds (process running for 404.231)
+00:03:42.274 Condition evaluation unchanged
+00:03:48.686 Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
+00:03:48.688 Commencing graceful shutdown. Waiting for active requests to complete
+00:03:48.688 Pausing ProtocolHandler ["http-nio-8080"]
+00:03:48.698 Graceful shutdown complete
+00:03:48.699 Stopping ProtocolHandler ["http-nio-8080"]
+00:03:48.703 Closing JPA EntityManagerFactory for persistence unit 'default'
+00:03:48.704 HikariPool-5 - Shutdown initiated...
+00:03:48.749 HikariPool-5 - Shutdown completed.
+00:03:48.841 Starting SarahApplication using Java 21.0.6 with PID 18880 (C:\code\project3\sarah\core\target\classes started by magas in C:\code\project3\sarah)
+00:03:48.842 No active profile set, falling back to 1 default profile: "default"
+00:03:49.148 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+00:03:49.170 Finished Spring Data repository scanning in 20 ms. Found 1 JPA repository interface.
+00:03:49.310 Tomcat initialized with port 8080 (http)
+00:03:49.311 Initializing ProtocolHandler ["http-nio-8080"]
+00:03:49.311 Starting service [Tomcat]
+00:03:49.311 Starting Servlet engine: [Apache Tomcat/10.1.39]
+00:03:49.335 Initializing Spring embedded WebApplicationContext
+00:03:49.335 Root WebApplicationContext: initialization completed in 492 ms
+00:03:49.452 HHH000204: Processing PersistenceUnitInfo [name: default]
+00:03:49.455 HHH000026: Second-level cache disabled
+00:03:49.466 No LoadTimeWeaver setup: ignoring JPA class transformer
+00:03:49.468 HikariPool-6 - Starting...
+00:03:49.496 HikariPool-6 - Added connection conn50: url=jdbc:h2:file:../data/mydb user=SA
+00:03:49.496 HikariPool-6 - Start completed.
+00:03:49.497 HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+00:03:49.498 HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-6)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+00:03:49.551 HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+00:03:49.553 Initialized JPA EntityManagerFactory for persistence unit 'default'
+00:03:50.059 Login Successful!
+00:03:50.347 Connected to WebSocket
+00:03:50.588 Finished Loading!
+00:03:50.678 spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+00:03:50.973 H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:../data/mydb'
+00:03:50.996 LiveReload server is running on port 35729
+00:03:51.000 Exposing 1 endpoint beneath base path '/actuator'
+00:03:51.019 Starting ProtocolHandler ["http-nio-8080"]
+00:03:51.023 Tomcat started on port 8080 (http) with context path '/'
+00:03:51.028 Started SarahApplication in 2.215 seconds (process running for 412.987)
+00:03:51.030 Condition evaluation unchanged
+00:04:19.197 Get event: aec24ca6-624c-4ac2-9e03-e3f4d91c07ff, !waifu
+00:04:19.200 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:04:27.241 Get event: 1d315ddc-4836-45fa-8579-0ad4f6471847, !waifu
+00:04:27.241 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:04:34.681 Get event: 3c3b6ada-24a8-43ba-ab28-89fbe7c0be9b, !waifu
+00:04:34.681 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:04:38.354 Get event: 62c43bed-9f0f-46f4-9ba5-75209fc2d08b, !waifu
+00:04:38.356 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:04:42.027 Get event: c01b782b-c02b-4af2-9534-4371d2978191, !waifu
+00:04:42.028 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:04:46.707 Get event: 10b9ca81-8ab3-446f-aacd-d39dfd42a1bc, !waifu
+00:04:46.708 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:05:31.728 Get event: 9835ba5a-2b85-4672-9a96-2ed5766af50a, !waifu
+00:05:31.729 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:05:56.801 Get event: 99b84c71-413a-46ea-adc7-f99007ab3572, !waifu
+00:05:56.802 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:06:22.106 Get event: 7fbee074-4824-470d-b3b1-63ff7cfa6dad, !waifu
+00:06:22.107 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:06:30.575 Get event: f91d81af-a189-4e31-9e0a-0041b51cc1af, !waifu
+00:06:30.576 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:06:35.423 Get event: 96ddcd22-e800-4bc1-8f93-19772e09d6f7, !waifu
+00:06:35.424 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:06:43.233 Get event: 54869674-07ed-45e8-b2e2-65f27f043943, !waifu
+00:06:43.233 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:07:49.827 Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
+00:07:49.830 Commencing graceful shutdown. Waiting for active requests to complete
+00:07:49.831 Pausing ProtocolHandler ["http-nio-8080"]
+00:07:49.850 Graceful shutdown complete
+00:07:49.852 Stopping ProtocolHandler ["http-nio-8080"]
+00:07:49.857 Closing JPA EntityManagerFactory for persistence unit 'default'
+00:07:49.859 HikariPool-6 - Shutdown initiated...
+00:07:49.878 HikariPool-6 - Shutdown completed.
+00:07:50.042 Starting SarahApplication using Java 21.0.6 with PID 18880 (C:\code\project3\sarah\core\target\classes started by magas in C:\code\project3\sarah)
+00:07:50.043 No active profile set, falling back to 1 default profile: "default"
+00:07:50.639 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+00:07:50.656 Finished Spring Data repository scanning in 15 ms. Found 1 JPA repository interface.
+00:07:50.890 Tomcat initialized with port 8080 (http)
+00:07:50.891 Initializing ProtocolHandler ["http-nio-8080"]
+00:07:50.892 Starting service [Tomcat]
+00:07:50.892 Starting Servlet engine: [Apache Tomcat/10.1.39]
+00:07:50.925 Initializing Spring embedded WebApplicationContext
+00:07:50.926 Root WebApplicationContext: initialization completed in 878 ms
+00:07:51.115 HHH000204: Processing PersistenceUnitInfo [name: default]
+00:07:51.121 HHH000026: Second-level cache disabled
+00:07:51.140 No LoadTimeWeaver setup: ignoring JPA class transformer
+00:07:51.142 HikariPool-7 - Starting...
+00:07:51.184 HikariPool-7 - Added connection conn60: url=jdbc:h2:file:../data/mydb user=SA
+00:07:51.184 HikariPool-7 - Start completed.
+00:07:51.185 HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+00:07:51.186 HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-7)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+00:07:51.278 HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+00:07:51.283 Initialized JPA EntityManagerFactory for persistence unit 'default'
+00:07:52.059 Login Successful!
+00:07:52.350 Connected to WebSocket
+00:07:52.585 Finished Loading!
+00:07:52.801 spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+00:07:53.724 H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:../data/mydb'
+00:07:53.815 LiveReload server is running on port 35729
+00:07:53.825 Exposing 1 endpoint beneath base path '/actuator'
+00:07:53.884 Starting ProtocolHandler ["http-nio-8080"]
+00:07:53.903 Tomcat started on port 8080 (http) with context path '/'
+00:07:53.912 Started SarahApplication in 3.917 seconds (process running for 655.871)
+00:07:53.918 Condition evaluation unchanged
+00:10:19.758 Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
+00:10:19.762 Commencing graceful shutdown. Waiting for active requests to complete
+00:10:19.763 Pausing ProtocolHandler ["http-nio-8080"]
+00:10:19.773 Graceful shutdown complete
+00:10:19.773 Stopping ProtocolHandler ["http-nio-8080"]
+00:10:19.776 Closing JPA EntityManagerFactory for persistence unit 'default'
+00:10:19.777 HikariPool-7 - Shutdown initiated...
+00:10:19.782 HikariPool-7 - Shutdown completed.
+00:10:19.896 Starting SarahApplication using Java 21.0.6 with PID 18880 (C:\code\project3\sarah\core\target\classes started by magas in C:\code\project3\sarah)
+00:10:19.896 No active profile set, falling back to 1 default profile: "default"
+00:10:20.212 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+00:10:20.224 Finished Spring Data repository scanning in 10 ms. Found 1 JPA repository interface.
+00:10:20.386 Tomcat initialized with port 8080 (http)
+00:10:20.387 Initializing ProtocolHandler ["http-nio-8080"]
+00:10:20.387 Starting service [Tomcat]
+00:10:20.388 Starting Servlet engine: [Apache Tomcat/10.1.39]
+00:10:20.417 Initializing Spring embedded WebApplicationContext
+00:10:20.417 Root WebApplicationContext: initialization completed in 518 ms
+00:10:20.543 HHH000204: Processing PersistenceUnitInfo [name: default]
+00:10:20.546 HHH000026: Second-level cache disabled
+00:10:20.558 No LoadTimeWeaver setup: ignoring JPA class transformer
+00:10:20.559 HikariPool-8 - Starting...
+00:10:20.589 HikariPool-8 - Added connection conn70: url=jdbc:h2:file:../data/mydb user=SA
+00:10:20.589 HikariPool-8 - Start completed.
+00:10:20.590 HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+00:10:20.591 HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-8)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+00:10:20.649 HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+00:10:20.652 Initialized JPA EntityManagerFactory for persistence unit 'default'
+00:10:21.249 Login Successful!
+00:10:21.584 Connected to WebSocket
+00:10:21.903 Finished Loading!
+00:10:22.054 spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+00:10:22.451 H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:../data/mydb'
+00:10:22.483 LiveReload server is running on port 35729
+00:10:22.490 Exposing 1 endpoint beneath base path '/actuator'
+00:10:22.514 Starting ProtocolHandler ["http-nio-8080"]
+00:10:22.518 Tomcat started on port 8080 (http) with context path '/'
+00:10:22.522 Started SarahApplication in 2.658 seconds (process running for 804.481)
+00:10:22.525 Condition evaluation unchanged
+00:10:30.749 Get event: 3dc7370f-05c0-4d66-8ee0-47f60c58d789, !waifu
+00:10:30.751 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:10:36.125 Get event: dec74dd5-1e43-47f5-a71b-d81b52f871bc, !waifu
+00:10:36.125 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:11:42.676 Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+00:11:42.680 Commencing graceful shutdown. Waiting for active requests to complete
+00:11:42.681 Pausing ProtocolHandler ["http-nio-8080"]
+00:11:42.694 Graceful shutdown complete
+00:11:42.695 Stopping ProtocolHandler ["http-nio-8080"]
+00:11:42.699 Closing JPA EntityManagerFactory for persistence unit 'default'
+00:11:42.701 HikariPool-8 - Shutdown initiated...
+00:11:42.737 HikariPool-8 - Shutdown completed.
+00:11:42.879 Starting SarahApplication using Java 21.0.6 with PID 18880 (C:\code\project3\sarah\core\target\classes started by magas in C:\code\project3\sarah)
+00:11:42.880 No active profile set, falling back to 1 default profile: "default"
+00:11:43.577 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+00:11:43.598 Finished Spring Data repository scanning in 18 ms. Found 1 JPA repository interface.
+00:11:43.824 Tomcat initialized with port 8080 (http)
+00:11:43.826 Initializing ProtocolHandler ["http-nio-8080"]
+00:11:43.826 Starting service [Tomcat]
+00:11:43.827 Starting Servlet engine: [Apache Tomcat/10.1.39]
+00:11:43.859 Initializing Spring embedded WebApplicationContext
+00:11:43.859 Root WebApplicationContext: initialization completed in 975 ms
+00:11:44.037 HHH000204: Processing PersistenceUnitInfo [name: default]
+00:11:44.045 HHH000026: Second-level cache disabled
+00:11:44.063 No LoadTimeWeaver setup: ignoring JPA class transformer
+00:11:44.065 HikariPool-9 - Starting...
+00:11:44.109 HikariPool-9 - Added connection conn80: url=jdbc:h2:file:../data/mydb user=SA
+00:11:44.110 HikariPool-9 - Start completed.
+00:11:44.111 HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+00:11:44.113 HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-9)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+00:11:44.192 HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+00:11:44.194 Initialized JPA EntityManagerFactory for persistence unit 'default'
+00:11:44.754 Login Successful!
+00:11:45.039 Connected to WebSocket
+00:11:45.298 Finished Loading!
+00:11:45.570 spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+00:11:46.246 H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:../data/mydb'
+00:11:46.325 LiveReload server is running on port 35729
+00:11:46.337 Exposing 1 endpoint beneath base path '/actuator'
+00:11:46.383 Starting ProtocolHandler ["http-nio-8080"]
+00:11:46.394 Tomcat started on port 8080 (http) with context path '/'
+00:11:46.409 Started SarahApplication in 3.577 seconds (process running for 888.369)
+00:11:46.418 Condition evaluation unchanged
+00:11:53.809 Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+00:11:53.811 Commencing graceful shutdown. Waiting for active requests to complete
+00:11:53.812 Pausing ProtocolHandler ["http-nio-8080"]
+00:11:53.821 Graceful shutdown complete
+00:11:53.822 Stopping ProtocolHandler ["http-nio-8080"]
+00:11:53.826 Closing JPA EntityManagerFactory for persistence unit 'default'
+00:11:53.826 HikariPool-9 - Shutdown initiated...
+00:11:53.841 HikariPool-9 - Shutdown completed.
+00:11:53.983 Starting SarahApplication using Java 21.0.6 with PID 18880 (C:\code\project3\sarah\core\target\classes started by magas in C:\code\project3\sarah)
+00:11:53.984 No active profile set, falling back to 1 default profile: "default"
+00:11:54.945 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+00:11:54.968 Finished Spring Data repository scanning in 22 ms. Found 1 JPA repository interface.
+00:11:55.197 Tomcat initialized with port 8080 (http)
+00:11:55.198 Initializing ProtocolHandler ["http-nio-8080"]
+00:11:55.199 Starting service [Tomcat]
+00:11:55.199 Starting Servlet engine: [Apache Tomcat/10.1.39]
+00:11:55.238 Initializing Spring embedded WebApplicationContext
+00:11:55.238 Root WebApplicationContext: initialization completed in 1250 ms
+00:11:55.379 HHH000204: Processing PersistenceUnitInfo [name: default]
+00:11:55.383 HHH000026: Second-level cache disabled
+00:11:55.401 No LoadTimeWeaver setup: ignoring JPA class transformer
+00:11:55.402 HikariPool-10 - Starting...
+00:11:55.431 HikariPool-10 - Added connection conn90: url=jdbc:h2:file:../data/mydb user=SA
+00:11:55.431 HikariPool-10 - Start completed.
+00:11:55.433 HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+00:11:55.433 HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-10)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+00:11:55.484 HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+00:11:55.488 Initialized JPA EntityManagerFactory for persistence unit 'default'
+00:11:56.092 Login Successful!
+00:11:56.384 Connected to WebSocket
+00:11:56.615 Finished Loading!
+00:11:56.788 spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+00:11:57.415 H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:../data/mydb'
+00:11:57.478 LiveReload server is running on port 35729
+00:11:57.486 Exposing 1 endpoint beneath base path '/actuator'
+00:11:57.532 Starting ProtocolHandler ["http-nio-8080"]
+00:11:57.544 Tomcat started on port 8080 (http) with context path '/'
+00:11:57.560 Started SarahApplication in 3.622 seconds (process running for 899.519)
+00:11:57.563 Condition evaluation unchanged
+00:12:02.494 Get event: d678b7d2-823c-42bc-8113-dc5e0b1d00ab, !waifu
+00:12:02.498 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:12:14.866 Get event: 1318272c-915b-42b4-93a9-4d7f124984c1, !waifu
+00:12:14.867 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:12:23.775 Get event: 84d55d35-5e79-4a02-a29d-26117a1c0e30, !waifu
+00:12:23.776 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:13:56.520 Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
+00:13:56.522 Commencing graceful shutdown. Waiting for active requests to complete
+00:13:56.522 Pausing ProtocolHandler ["http-nio-8080"]
+00:13:56.529 Graceful shutdown complete
+00:13:56.529 Stopping ProtocolHandler ["http-nio-8080"]
+00:13:56.532 Closing JPA EntityManagerFactory for persistence unit 'default'
+00:13:56.532 HikariPool-10 - Shutdown initiated...
+00:13:56.536 HikariPool-10 - Shutdown completed.
+00:13:56.622 Starting SarahApplication using Java 21.0.6 with PID 18880 (C:\code\project3\sarah\core\target\classes started by magas in C:\code\project3\sarah)
+00:13:56.623 No active profile set, falling back to 1 default profile: "default"
+00:13:56.882 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+00:13:56.892 Finished Spring Data repository scanning in 9 ms. Found 1 JPA repository interface.
+00:13:57.004 Tomcat initialized with port 8080 (http)
+00:13:57.006 Initializing ProtocolHandler ["http-nio-8080"]
+00:13:57.006 Starting service [Tomcat]
+00:13:57.006 Starting Servlet engine: [Apache Tomcat/10.1.39]
+00:13:57.039 Initializing Spring embedded WebApplicationContext
+00:13:57.040 Root WebApplicationContext: initialization completed in 415 ms
+00:13:57.141 HHH000204: Processing PersistenceUnitInfo [name: default]
+00:13:57.144 HHH000026: Second-level cache disabled
+00:13:57.150 No LoadTimeWeaver setup: ignoring JPA class transformer
+00:13:57.150 HikariPool-11 - Starting...
+00:13:57.176 HikariPool-11 - Added connection conn100: url=jdbc:h2:file:../data/mydb user=SA
+00:13:57.176 HikariPool-11 - Start completed.
+00:13:57.177 HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+00:13:57.178 HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-11)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+00:13:57.216 HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+00:13:57.218 Initialized JPA EntityManagerFactory for persistence unit 'default'
+00:13:57.700 Login Successful!
+00:13:57.977 Connected to WebSocket
+00:13:58.223 Finished Loading!
+00:13:58.298 spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+00:13:58.563 H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:../data/mydb'
+00:13:58.599 LiveReload server is running on port 35729
+00:13:58.606 Exposing 1 endpoint beneath base path '/actuator'
+00:13:58.629 Starting ProtocolHandler ["http-nio-8080"]
+00:13:58.634 Tomcat started on port 8080 (http) with context path '/'
+00:13:58.639 Started SarahApplication in 2.04 seconds (process running for 1020.598)
+00:13:58.642 Condition evaluation unchanged
+00:15:06.947 Get event: 23a05c9a-1277-4566-99d6-37b27e1d6a5c, !waifu
+00:15:06.948 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:15:11.555 Get event: ebb98687-ed8b-4360-a227-c7aefa400ac4, !waifu
+00:15:11.556 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:16:05.098 Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
+00:16:05.101 Commencing graceful shutdown. Waiting for active requests to complete
+00:16:05.102 Pausing ProtocolHandler ["http-nio-8080"]
+00:16:05.112 Graceful shutdown complete
+00:16:05.112 Stopping ProtocolHandler ["http-nio-8080"]
+00:16:05.115 Closing JPA EntityManagerFactory for persistence unit 'default'
+00:16:05.116 HikariPool-11 - Shutdown initiated...
+00:16:05.143 HikariPool-11 - Shutdown completed.
+00:16:05.271 Starting SarahApplication using Java 21.0.6 with PID 18880 (C:\code\project3\sarah\core\target\classes started by magas in C:\code\project3\sarah)
+00:16:05.272 No active profile set, falling back to 1 default profile: "default"
+00:16:05.674 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+00:16:05.689 Finished Spring Data repository scanning in 13 ms. Found 1 JPA repository interface.
+00:16:05.922 Tomcat initialized with port 8080 (http)
+00:16:05.923 Initializing ProtocolHandler ["http-nio-8080"]
+00:16:05.923 Starting service [Tomcat]
+00:16:05.924 Starting Servlet engine: [Apache Tomcat/10.1.39]
+00:16:05.968 Initializing Spring embedded WebApplicationContext
+00:16:05.968 Root WebApplicationContext: initialization completed in 688 ms
+00:16:06.177 HHH000204: Processing PersistenceUnitInfo [name: default]
+00:16:06.180 HHH000026: Second-level cache disabled
+00:16:06.194 No LoadTimeWeaver setup: ignoring JPA class transformer
+00:16:06.195 HikariPool-12 - Starting...
+00:16:06.228 HikariPool-12 - Added connection conn110: url=jdbc:h2:file:../data/mydb user=SA
+00:16:06.229 HikariPool-12 - Start completed.
+00:16:06.230 HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+00:16:06.231 HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-12)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+00:16:06.285 HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+00:16:06.288 Initialized JPA EntityManagerFactory for persistence unit 'default'
+00:16:06.882 Login Successful!
+00:16:07.253 Connected to WebSocket
+00:16:07.478 Finished Loading!
+00:16:07.728 spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+00:16:08.116 H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:../data/mydb'
+00:16:08.149 LiveReload server is running on port 35729
+00:16:08.155 Exposing 1 endpoint beneath base path '/actuator'
+00:16:08.181 Starting ProtocolHandler ["http-nio-8080"]
+00:16:08.186 Tomcat started on port 8080 (http) with context path '/'
+00:16:08.190 Started SarahApplication in 2.96 seconds (process running for 1150.15)
+00:16:08.192 Condition evaluation unchanged
+00:16:09.570 Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
+00:16:09.572 Commencing graceful shutdown. Waiting for active requests to complete
+00:16:09.573 Pausing ProtocolHandler ["http-nio-8080"]
+00:16:09.587 Graceful shutdown complete
+00:16:09.588 Stopping ProtocolHandler ["http-nio-8080"]
+00:16:09.590 Closing JPA EntityManagerFactory for persistence unit 'default'
+00:16:09.592 HikariPool-12 - Shutdown initiated...
+00:16:09.610 HikariPool-12 - Shutdown completed.
+00:16:09.755 Starting SarahApplication using Java 21.0.6 with PID 18880 (C:\code\project3\sarah\core\target\classes started by magas in C:\code\project3\sarah)
+00:16:09.755 No active profile set, falling back to 1 default profile: "default"
+00:16:10.278 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+00:16:10.293 Finished Spring Data repository scanning in 13 ms. Found 1 JPA repository interface.
+00:16:10.501 Tomcat initialized with port 8080 (http)
+00:16:10.503 Initializing ProtocolHandler ["http-nio-8080"]
+00:16:10.505 Starting service [Tomcat]
+00:16:10.505 Starting Servlet engine: [Apache Tomcat/10.1.39]
+00:16:10.569 Initializing Spring embedded WebApplicationContext
+00:16:10.570 Root WebApplicationContext: initialization completed in 812 ms
+00:16:10.746 HHH000204: Processing PersistenceUnitInfo [name: default]
+00:16:10.750 HHH000026: Second-level cache disabled
+00:16:10.761 No LoadTimeWeaver setup: ignoring JPA class transformer
+00:16:10.762 HikariPool-13 - Starting...
+00:16:10.795 HikariPool-13 - Added connection conn120: url=jdbc:h2:file:../data/mydb user=SA
+00:16:10.797 HikariPool-13 - Start completed.
+00:16:10.798 HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+00:16:10.799 HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-13)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+00:16:10.869 HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+00:16:10.874 Initialized JPA EntityManagerFactory for persistence unit 'default'
+00:16:11.480 Login Successful!
+00:16:11.766 Connected to WebSocket
+00:16:12.019 Finished Loading!
+00:16:12.147 spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+00:16:12.585 H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:../data/mydb'
+00:16:12.631 LiveReload server is running on port 35729
+00:16:12.639 Exposing 1 endpoint beneath base path '/actuator'
+00:16:12.663 Starting ProtocolHandler ["http-nio-8080"]
+00:16:12.670 Tomcat started on port 8080 (http) with context path '/'
+00:16:12.679 Started SarahApplication in 2.962 seconds (process running for 1154.638)
+00:16:12.682 Condition evaluation unchanged
+00:17:21.709 Get event: 26fd57ac-5171-4345-abf3-c543ac258147, !waifu
+00:17:21.713 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:17:25.513 Get event: 45e2ad00-80e7-4f7c-bc25-5b7ed0fad615, !waifu
+00:17:25.514 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:17:29.638 Get event: e3c0edab-a608-46a3-a965-b21aa941eb36, !waifu
+00:17:29.639 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:17:33.272 Get event: 03d62294-05c3-477e-b8e0-a8957ac10f79, !waifu
+00:17:33.273 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:17:37.272 Get event: d026af8b-9503-44b7-bbcc-32163eec874a, !waifu
+00:17:37.273 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:22:36.908 Get event: 593c2ac0-8e31-4f7b-99f2-faa1dc96db8c, !waifu
+00:22:36.909 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:22:44.502 Get event: 5a4c97bd-b66d-4c7f-b50d-f934954edc64, !waifu
+00:22:44.503 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:22:48.439 Get event: 83285c3e-a97a-4ebb-8db1-2db697a91eda, !waiofu
+00:22:48.440 executer: ru.sarahbot.sarah.service.generator.DefaultExecuterService, event: SS, general, High_Shinkai_Labs, !waiofu
+00:22:48.440 Unexpected call of default executer, event: SS, general, High_Shinkai_Labs, !waiofu
+00:22:50.800 Get event: 1e7ef9d6-3ee8-4093-bc4d-2e398f797a82, !waifu
+00:22:50.802 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:22:54.155 Get event: 5254d833-24c7-460f-9ab4-a9fe08d47485, !waifu
+00:22:54.156 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:22:57.687 Get event: 688f2a3e-e8dd-4495-a9df-ac83138ce5ce, !waifu
+00:22:57.688 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
+00:23:19.928 Get event: 810ecc38-bceb-4025-8636-8ef8ae812cf0, !waifu
+00:23:19.930 executer: ru.sarahbot.sarah.service.generator.WaifuCreatorExecuterService, event: SS, general, High_Shinkai_Labs, !waifu
