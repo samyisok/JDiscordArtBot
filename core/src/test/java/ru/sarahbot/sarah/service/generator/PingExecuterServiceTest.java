@@ -13,33 +13,35 @@ import org.mockito.quality.Strictness;
 import ru.sarahbot.sarah.service.MockJdaEvent;
 import ru.sarahbot.sarah.service.MockJdaEvent.MockedEventContext;
 
+@SuppressWarnings("all")
 @MockitoSettings(strictness = Strictness.LENIENT)
 @ExtendWith(MockitoExtension.class)
 public class PingExecuterServiceTest {
 
-  @Spy PingExecuterService pingExecuterService;
+    @Spy
+    PingExecuterService pingExecuterService;
 
-  @DisplayName("execute main")
-  @Test
-  void testExecute() {
-    MockedEventContext event = MockJdaEvent.mockMessageEvent("!ping");
+    @DisplayName("execute main")
+    @Test
+    void testExecute() {
+        MockedEventContext event = MockJdaEvent.mockMessageEvent("!ping");
 
-    pingExecuterService.execute(event.messageReceivedEvent());
+        pingExecuterService.execute(event.messageReceivedEvent());
 
-    verify(event.messageReceivedEvent()).getChannel();
-    verify(event.messageChannelUnion()).sendMessage("pong!");
-    verify(event.messageCreateAction()).queue();
-  }
+        verify(event.messageReceivedEvent()).getChannel();
+        verify(event.messageChannelUnion()).sendMessage("pong!");
+        verify(event.messageCreateAction()).queue();
+    }
 
-  @DisplayName("isExecuterAvailable is true")
-  @Test
-  void testIsExecuterAvailableTrue() {
-    assertThat(pingExecuterService.isExecuterAvailable("!ping")).isTrue();
-  }
+    @DisplayName("isExecuterAvailable is true")
+    @Test
+    void testIsExecuterAvailableTrue() {
+        assertThat(pingExecuterService.isExecuterAvailable("!ping")).isTrue();
+    }
 
-  @DisplayName("isExecuterAvailable is false")
-  @Test
-  void testIsExecuterAvailableFalse() {
-    assertThat(pingExecuterService.isExecuterAvailable("!help")).isFalse();
-  }
+    @DisplayName("isExecuterAvailable is false")
+    @Test
+    void testIsExecuterAvailableFalse() {
+        assertThat(pingExecuterService.isExecuterAvailable("!help")).isFalse();
+    }
 }

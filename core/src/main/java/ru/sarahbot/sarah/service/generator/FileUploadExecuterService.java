@@ -16,6 +16,7 @@ import ru.sarahbot.sarah.exception.ValidationInputException;
 import ru.sarahbot.sarah.file.service.ExtensionUtils;
 import ru.sarahbot.sarah.file.service.FileService;
 
+@SuppressWarnings("all")
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -44,30 +45,29 @@ public class FileUploadExecuterService implements ExecuterGeneratorInterface {
 
         User user = event.getAuthor();
         Message message = event.getMessage();
-        if (message != null) {
-            Attachment attachment = message.getAttachments().getFirst();
-            String contentType = attachment.getContentType();
-            String fileName = attachment.getFileName();
-            Integer fileSize = attachment.getSize();
 
-            validateName(fileName);
-            validateContentType(contentType);
-            validateSize(fileSize);
-            UUID uuid = getUuid();
+        Attachment attachment = message.getAttachments().getFirst();
+        String contentType = attachment.getContentType();
+        String fileName = attachment.getFileName();
+        Integer fileSize = attachment.getSize();
 
-            log.info(
-                    "saving the file with data: {}, {}, {}, {}, {}, {}, {}",
-                    fileName,
-                    user,
-                    contentType,
-                    fileSize,
-                    attachment,
-                    uuid);
+        validateName(fileName);
+        validateContentType(contentType);
+        validateSize(fileSize);
+        UUID uuid = getUuid();
 
-            fileService.saveFile(fileName, user, contentType, attachment, uuid);
+        log.info(
+                "saving the file with data: {}, {}, {}, {}, {}, {}, {}",
+                fileName,
+                user,
+                contentType,
+                fileSize,
+                attachment,
+                uuid);
 
-            event.getMessage().addReaction(Emoji.fromUnicode("✅")).queue();
-        }
+        fileService.saveFile(fileName, user, contentType, attachment, uuid);
+
+        event.getMessage().addReaction(Emoji.fromUnicode("✅")).queue();
     }
 
     UUID getUuid() {
@@ -88,7 +88,7 @@ public class FileUploadExecuterService implements ExecuterGeneratorInterface {
 
     void validateSize(Integer fileSize) {
         if (fileSize == null
-                || fileSize.intValue() <= 0
+                || fileSize <= 0
                 // if maxSize less than filesize then throw an exception
                 || maxFileSize.compareTo(fileSize.longValue()) < 0) {
             throw new ValidationInputException("Wrong file size");

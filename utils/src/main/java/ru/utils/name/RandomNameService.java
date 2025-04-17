@@ -17,12 +17,13 @@ import java.util.jar.JarFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class RandomNameService {
+    private static final String FOLDER = "names";
     private final Map<String, Map<String, Set<String>>> dataNames;
     private final ThreadLocalRandom random = ThreadLocalRandom.current();
     private final Set<String> REVERSE_NAMES = Set.of("chinese", "japanese");
 
     public RandomNameService() {
-        dataNames = loadNameData("names");
+        dataNames = loadNameData();
     }
 
     public String generateRandomName() {
@@ -42,19 +43,19 @@ public class RandomNameService {
         return REVERSE_NAMES.contains(language) ? lastName + " " + firstName : firstName + " " + lastName;
     }
 
-    public static Map<String, Map<String, Set<String>>> loadNameData(String folderName) {
+    public static Map<String, Map<String, Set<String>>> loadNameData() {
         Map<String, Map<String, Set<String>>> result = new HashMap<>();
 
         try {
             // Load all files from the folder inside resources
-            Enumeration<URL> resources = RandomNameService.class.getClassLoader().getResources(folderName);
+            Enumeration<URL> resources = RandomNameService.class.getClassLoader().getResources(FOLDER);
 
             List<String> filenames = new ArrayList<>();
             while (resources.hasMoreElements()) {
                 URL url = resources.nextElement();
                 switch (url.getProtocol()) {
                     case "file" -> filenames.addAll(listFilesFromDirectory(url));
-                    case "jar" -> filenames.addAll(listFilesFromJar(url, folderName));
+                    case "jar" -> filenames.addAll(listFilesFromJar(url, FOLDER));
                 }
             }
 
@@ -73,7 +74,7 @@ public class RandomNameService {
                 String category = parts[1]; // "firstname" or "lastname"
 
                 try (InputStream is = RandomNameService.class.getClassLoader()
-                        .getResourceAsStream(folderName + "/" + filename)) {
+                        .getResourceAsStream(FOLDER + "/" + filename)) {
 
                     if (is == null) {
                         continue;

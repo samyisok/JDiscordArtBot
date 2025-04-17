@@ -41,6 +41,7 @@ import reactor.core.publisher.Mono;
 import ru.sarahbot.sarah.file.dto.ResponseDto;
 import ru.sarahbot.sarah.service.MockWebClient;
 
+@SuppressWarnings("all")
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
 public class FileDownloadServiceTest {

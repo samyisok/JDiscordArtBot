@@ -32,7 +32,7 @@ public class WaifuCreatorService {
             new AgeGroup(16, 2000),
             new AgeGroup(2000, 99999));
 
-    private final Set<String> VIRTUES = Set.of(
+    private static final Set<String> VIRTUES = Set.of(
             "Master of Cooking",
             "Alchemist",
             "Intellegent",
@@ -76,7 +76,7 @@ public class WaifuCreatorService {
             "Brain Calculator",
             "Timetraveler");
 
-    private final Set<String> FLAWS = Set.of(
+    private static final Set<String> FLAWS = Set.of(
             "Smokes",
             "Drinks",
             "Drugs",
@@ -85,6 +85,7 @@ public class WaifuCreatorService {
             "Con Artist",
             "Disabled",
             "Jealous",
+            "Tax Evader",
             "Awful character",
             "Criminal",
             "PTSD",
@@ -110,9 +111,9 @@ public class WaifuCreatorService {
             "From Space",
             "Can eat only rocks");
 
-    private final Set<String> QUIRKS = Stream.concat(FLAWS.stream(), VIRTUES.stream()).collect(Collectors.toSet());
+    static final Set<String> QUIRKS = Stream.concat(FLAWS.stream(), VIRTUES.stream()).collect(Collectors.toSet());
 
-    private final Set<String> RACES = Set.of(
+    static final Set<String> RACES = Set.of(
             "Caucasian-Human",
             "Asian-Human",
             "Afro-Human",
@@ -138,31 +139,12 @@ public class WaifuCreatorService {
 
     public String generate() {
         int totalRaces = random.nextInt(1, 3);
-        AgeGroup ageGroup = AGE_GROUPS.stream().skip(random.nextInt(AGE_GROUPS.size())).findFirst()
-                .orElse(new AgeGroup(42, 42));
-
+        int age = getAge();
         int totalQuirks = random.nextInt(3, 5);
         String name = randomNameService.generateRandomName();
-        int age = random.nextInt(ageGroup.from(), ageGroup.to());
-        int height = random.nextInt(130, 210);
-        Set<String> quirks = new HashSet<>();
-
-        while (quirks.size() <= totalQuirks) {
-            String quirk = QUIRKS.stream().skip(random.nextInt(QUIRKS.size())).findFirst().get();
-            if (quirks.contains(quirk)) {
-                continue;
-            }
-            quirks.add(quirk);
-        }
-
-        Set<String> races = new HashSet<>();
-        while (races.size() < totalRaces) {
-            String race = RACES.stream().skip(random.nextInt(RACES.size())).findFirst().get();
-            if (races.contains(race)) {
-                continue;
-            }
-            races.add(race);
-        }
+        int height = getHeight();
+        String quirks = getQuirks(totalQuirks);
+        String races = getRaces(totalRaces);
 
         String waifu = MessageFormat.format("""
                 name: {0}
@@ -172,11 +154,51 @@ public class WaifuCreatorService {
                 quirks: {4}
                 """,
                 name,
-                String.join(", ", races),
+                races,
                 age,
                 height,
-                String.join(", ", quirks));
+                quirks);
 
         return waifu;
+    }
+
+    int getAge() {
+        AgeGroup ageGroup = getAgeGroup();
+        int age = random.nextInt(ageGroup.from(), ageGroup.to());
+        return age;
+    }
+
+    int getHeight() {
+        return random.nextInt(130, 210);
+    }
+
+    AgeGroup getAgeGroup() {
+        return AGE_GROUPS.stream().skip(random.nextInt(AGE_GROUPS.size())).findFirst()
+                .orElse(new AgeGroup(42, 42));
+    }
+
+    String getQuirks(int totalQuirks) {
+        Set<String> quirks = new HashSet<>();
+
+        while (quirks.size() < totalQuirks) {
+            String quirk = QUIRKS.stream().skip(random.nextInt(QUIRKS.size())).findFirst().get();
+            if (quirks.contains(quirk)) {
+                continue;
+            }
+            quirks.add(quirk);
+        }
+        return String.join(", ", quirks);
+    }
+
+    String getRaces(int totalRaces) {
+        Set<String> races = new HashSet<>();
+        while (races.size() < totalRaces) {
+            String race = RACES.stream().skip(random.nextInt(RACES.size())).findFirst().get();
+            if (races.contains(race)) {
+                continue;
+            }
+            races.add(race);
+        }
+        return String.join(", ", races);
     }
 }

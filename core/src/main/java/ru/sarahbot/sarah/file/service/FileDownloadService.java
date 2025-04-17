@@ -5,16 +5,18 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HexFormat;
 import java.util.function.Function;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 import ru.sarahbot.sarah.exception.ValidationInputException;
 import ru.sarahbot.sarah.file.dto.ResponseDto;
@@ -71,12 +73,13 @@ public class FileDownloadService {
         return ExtensionUtils.getExtension(contentType);
     }
 
+    @SuppressWarnings("null")
     void validate(String contentType, HttpHeaders headers, byte[] imageBytes) {
         if (headers == null || imageBytes == null || contentType == null || headers.getContentType() == null) {
             throw new ValidationInputException("null in data");
         }
 
-        if (!contentType.toString().equals(headers.getContentType().toString())) {
+        if (!contentType.equals(headers.getContentType().toString())) {
             throw new ValidationInputException("wrong type");
         }
 
@@ -120,7 +123,7 @@ public class FileDownloadService {
         try {
             MessageDigest sha = MessageDigest.getInstance("SHA-1");
             return HexFormat.of().formatHex(sha.digest(data));
-        } catch (Exception e) {
+        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Failed sha generation");
         }
     }

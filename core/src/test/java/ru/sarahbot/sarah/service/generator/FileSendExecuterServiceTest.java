@@ -32,6 +32,7 @@ import ru.sarahbot.sarah.file.service.FileService;
 import ru.sarahbot.sarah.service.MockJdaEvent;
 import ru.sarahbot.sarah.service.MockJdaEvent.MockedEventContext;
 
+@SuppressWarnings("all")
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
 public class FileSendExecuterServiceTest {
@@ -52,6 +53,7 @@ public class FileSendExecuterServiceTest {
     Path tempDir;
 
     @BeforeEach
+    @SuppressWarnings("unused")
     void before() {
         ReflectionTestUtils.setField(fileSendExecuterService, "saveDirectory", tempDir.toString());
 

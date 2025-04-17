@@ -29,7 +29,7 @@ public class EventProcessor extends ListenerAdapter {
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
         // make sure we handle the right command
         switch (event.getName()) {
-            case "ping":
+            case "ping" -> {
                 long time = System.currentTimeMillis();
                 event
                         .reply("Pong!")
@@ -41,9 +41,8 @@ public class EventProcessor extends ListenerAdapter {
                                                 "Pong: %d ms", System.currentTimeMillis() - time) // then edit original
                         )
                         .queue(); // Queue both reply and edit
-                break;
-            default:
-                System.out.printf("Unknown command %s used by %#s%n", event.getName(), event.getUser());
+            }
+            default -> System.out.printf("Unknown command %s used by %#s%n", event.getName(), event.getUser());
         }
     }
 
