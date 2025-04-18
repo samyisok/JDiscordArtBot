@@ -89,12 +89,6 @@
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
-            <artifactId>mockito-inline</artifactId>
-            <version>5.2.0</version> <!-- or latest -->
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
@@ -136,13 +130,6 @@
                     <includes>
                         <include>**/*Test.java</include>
                     </includes>
-                    <reportFormat>plain</reportFormat>
-                    <printSummary>true</printSummary>
-                    <useFile>false</useFile>
-                    <redirectTestOutputToFile>false</redirectTestOutputToFile>
-                    <trimStackTrace>true</trimStackTrace>
-                    <forkCount>1</forkCount>
-                    <reuseForks>true</reuseForks>
                 </configuration>
             </plugin>
         </plugins>
