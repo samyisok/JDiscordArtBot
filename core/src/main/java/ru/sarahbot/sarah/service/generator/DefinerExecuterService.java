@@ -3,13 +3,14 @@ package ru.sarahbot.sarah.service.generator;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 @Service
 public class DefinerExecuterService implements ExecuterGeneratorInterface {
-
     private static final Set<String> MESSAGES = Set.of("!это", "!эта", "!эти", "!%");
 
     static final Set<String> ANSWERS = Set.of(

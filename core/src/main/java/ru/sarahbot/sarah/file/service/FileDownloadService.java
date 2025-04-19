@@ -9,22 +9,21 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HexFormat;
 import java.util.function.Function;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 import ru.sarahbot.sarah.exception.ValidationInputException;
 import ru.sarahbot.sarah.file.dto.ResponseDto;
 
-@Slf4j
 @Service
-@RequiredArgsConstructor
 public class FileDownloadService {
+    private final Logger log = LoggerFactory.getLogger(getClass());
     private final WebClient webClient;
 
     @Value("${file.save.path}")
@@ -33,6 +32,10 @@ public class FileDownloadService {
     // max size of free files
     @Value("${file.size.max:10000000}")
     private Long maxFileSize;
+
+    public FileDownloadService(WebClient webClient) {
+        this.webClient = webClient;
+    }
 
     public File downloadAndSave(String url, String contentType, String username) {
         log.info("Starting to download: {}, {}, {}, {}", url, contentType, username);

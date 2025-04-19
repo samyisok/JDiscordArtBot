@@ -6,25 +6,30 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Set;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.utils.FileUpload;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.sarahbot.sarah.file.dto.FileEntity;
 import ru.sarahbot.sarah.file.service.FileService;
 
-@Slf4j
 @Service
-@RequiredArgsConstructor
 public class FileSendExecuterService implements ExecuterGeneratorInterface {
+    private final Logger log = LoggerFactory.getLogger(getClass());
+
     @Value("${file.save.path}")
     private String saveDirectory;
 
     private final FileService fileService;
     private static final Set<String> MESSAGES = Set.of("!help", "!херп", "!хелп");
+
+    public FileSendExecuterService(FileService fileService) {
+        this.fileService = fileService;
+    }
 
     @Override
     public Boolean isExecuterAvailable(String message) {

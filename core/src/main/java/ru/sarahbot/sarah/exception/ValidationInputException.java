@@ -1,6 +1,7 @@
 package ru.sarahbot.sarah.exception;
 
-import lombok.experimental.StandardException;
-
-@StandardException
-public class ValidationInputException extends RuntimeException {}
+public class ValidationInputException extends RuntimeException {
+    public ValidationInputException(String message) {
+        super(message);
+    }
+}

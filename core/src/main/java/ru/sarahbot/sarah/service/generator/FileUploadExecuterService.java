@@ -2,13 +2,15 @@ package ru.sarahbot.sarah.service.generator;
 
 import java.util.Set;
 import java.util.UUID;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.Message.Attachment;
 import net.dv8tion.jda.api.entities.emoji.Emoji;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.sarahbot.sarah.exception.MessageRuntimeException;
@@ -17,10 +19,9 @@ import ru.sarahbot.sarah.file.service.ExtensionUtils;
 import ru.sarahbot.sarah.file.service.FileService;
 
 @SuppressWarnings("all")
-@Slf4j
 @Service
-@RequiredArgsConstructor
 public class FileUploadExecuterService implements ExecuterGeneratorInterface {
+    private final Logger log = LoggerFactory.getLogger(getClass());
     private final FileService fileService;
 
     @Value("${validations.file.namesize.max:64}")
@@ -31,6 +32,10 @@ public class FileUploadExecuterService implements ExecuterGeneratorInterface {
     private Long maxFileSize;
 
     private static final Set<String> MESSAGES = Set.of("!addhelp");
+
+    public FileUploadExecuterService(FileService fileService) {
+        this.fileService = fileService;
+    }
 
     @Override
     public Boolean isExecuterAvailable(String message) {

@@ -3,22 +3,29 @@ package ru.sarahbot.sarah.service;
 import java.util.List;
 import java.util.UUID;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.session.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.sarahbot.sarah.service.generator.DefaultExecuterService;
 import ru.sarahbot.sarah.service.generator.ExecuterGeneratorInterface;
 
-@Slf4j
 @Service
-@RequiredArgsConstructor
 public class EventProcessor extends ListenerAdapter {
+    private final Logger log = LoggerFactory.getLogger(getClass());
+
     private final List<ExecuterGeneratorInterface> messageExecutersList;
     private final DefaultExecuterService defaultExecuterService;
+
+    public EventProcessor(DefaultExecuterService defaultExecuterService,
+            List<ExecuterGeneratorInterface> messageExecutersList) {
+        this.defaultExecuterService = defaultExecuterService;
+        this.messageExecutersList = messageExecutersList;
+    }
 
     @Override
     public void onReady(ReadyEvent event) {
@@ -57,8 +64,7 @@ public class EventProcessor extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent event) {
         String content = event.getMessage().getContentRaw();
         // Ignore bot messages
-        if (event.getAuthor() == null
-                || !content.startsWith("!")
+        if (!content.startsWith("!")
                 || event.getAuthor().isBot()
                 || event.getAuthor().getGlobalName() == null) {
             return;
