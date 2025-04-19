@@ -36,3 +36,4 @@ downloads
 data
 logs/
 logs/app.log
+core/src/main/resources/.env.local
