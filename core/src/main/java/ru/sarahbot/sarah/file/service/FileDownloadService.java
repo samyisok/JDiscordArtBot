@@ -76,7 +76,6 @@ public class FileDownloadService {
         return ExtensionUtils.getExtension(contentType);
     }
 
-    @SuppressWarnings("null")
     void validate(String contentType, HttpHeaders headers, byte[] imageBytes) {
         if (headers == null || imageBytes == null || contentType == null || headers.getContentType() == null) {
             throw new ValidationInputException("null in data");
