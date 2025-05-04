@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sarah-bot
+  namespace: sarah-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sarah-bot
+  template:
+    metadata:
+      labels:
+        app: sarah-bot
+    spec:
+      containers:
+      - name: sarah-bot
+        image: sarah-bot
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+        envFrom:
+        - configMapRef:
+            name: sarah-config
+        env:
+        - name: REGISTRY_URL
+          valueFrom:
+            configMapKeyRef:
+              name: sarah-config
+              key: registry_url
+        - name: JDA_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: sarah-secrets
+              key: jda-api-key
+        - name: SPRING_PROFILES_ACTIVE
+          value: "prod"
+        - name: DB_URL
+          value: "jdbc:h2:file:/data/mydb"
+        - name: FILE_SAVE_PATH
+          value: "/data/download"
+        - name: LOG_FILE_PATH
+          value: "/data/logs"
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: sarah-pvc

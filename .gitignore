@@ -39,3 +39,9 @@ logs/app.log
 core/src/main/resources/.env.local
 logs
 run.bat
+.env
+
+# Kubernetes secrets
+k8s/secrets/
+*.secret
+.env

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sarah-config
+  namespace: sarah-bot
+data:
+  registry_url: "localhost:5000"
