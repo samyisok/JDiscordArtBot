@@ -11,9 +11,3 @@ images:
 - name: sarah-bot
   newName: localhost:5000/sarah-bot
   newTag: latest
-
-secretGenerator:
-- name: sarah-secrets
-  namespace: sarah-bot
-  envs:
-  - .env
