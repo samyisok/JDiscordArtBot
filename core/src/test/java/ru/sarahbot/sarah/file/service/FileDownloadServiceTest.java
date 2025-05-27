@@ -27,6 +27,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
@@ -38,8 +39,9 @@ import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import reactor.core.publisher.Mono;
-import ru.sarahbot.sarah.file.dto.ResponseDto;
 import ru.sarahbot.sarah.service.MockWebClient;
+import ru.sarahbot.sarah.webclient.dto.ResponseDto;
+import ru.sarahbot.sarah.webclient.service.WebClientService;
 
 @SuppressWarnings("all")
 @ExtendWith(MockitoExtension.class)
@@ -58,11 +60,12 @@ public class FileDownloadServiceTest {
 
     private static final String URL = "/url";
 
-    WebClient webClient = MockWebClient.getMockWebClient();
+    @Mock
+    WebClientService webClientService;
 
     @Spy
     @InjectMocks
-    FileDownloadService fileDownloadService = new FileDownloadService(webClient);
+    FileDownloadService fileDownloadService;
 
     File file;
     Function function;
@@ -81,13 +84,13 @@ public class FileDownloadServiceTest {
         doReturn(file).when(fileDownloadService).saveFileToFs(any(), any(), any());
 
         function = mock(Function.class);
-        doReturn(function).when(fileDownloadService).getResponseFunc();
 
         httpHeaders = mock(HttpHeaders.class);
         when(httpHeaders.getContentType()).thenReturn(MediaType.IMAGE_JPEG);
         when(httpHeaders.getContentLength()).thenReturn((long) BYTES.length);
         responseDto = new ResponseDto(BYTES, httpHeaders);
-        doReturn(responseDto).when(fileDownloadService).getResponseDto(URL, function);
+        when(webClientService.getResponseDto(URL)).thenReturn(responseDto);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -95,8 +98,7 @@ public class FileDownloadServiceTest {
     void testDownloadAndSave() {
         File fileRes = fileDownloadService.downloadAndSave(URL, MediaType.IMAGE_JPEG_VALUE, USERNAME);
 
-        verify(fileDownloadService).getResponseFunc();
-        verify(fileDownloadService).getResponseDto(URL, function);
+        verify(webClientService).getResponseDto(URL);
 
         verify(fileDownloadService).validate(MediaType.IMAGE_JPEG_VALUE, httpHeaders, responseDto.bodyBytes());
         verify(fileDownloadService).getExtension(MediaType.IMAGE_JPEG_VALUE);
@@ -193,35 +195,5 @@ public class FileDownloadServiceTest {
             assertThatNoException()
                     .isThrownBy(() -> fileDownloadService.validate(contentType, httpHeaders, BYTES));
         }
-    }
-
-    @Test
-    void testGetResponseDto() {
-        doCallRealMethod().when(fileDownloadService).getResponseDto(any(), any());
-        var res = fileDownloadService.getResponseDto(URL, function);
-        assertThat(res.getClass()).isEqualTo(ResponseDto.class);
-    }
-
-    @Test
-    void testGetResponseFunc() {
-        doCallRealMethod().when(fileDownloadService).getResponseFunc();
-        Function<ClientResponse, ? extends Mono<ResponseDto>> func = fileDownloadService.getResponseFunc();
-
-        assertThat(func).isNotNull();
-
-        ClientResponse clientResponse = mock(ClientResponse.class);
-        ClientResponse.Headers headers = mock(ClientResponse.Headers.class);
-        when(headers.asHttpHeaders()).thenReturn(httpHeaders);
-        when(clientResponse.headers()).thenReturn(headers);
-        byte[] content = "hello".getBytes(StandardCharsets.UTF_8);
-        Mono<byte[]> monoRes = Mono.just(content);
-        when(clientResponse.bodyToMono(byte[].class)).thenReturn(monoRes);
-
-        Mono<ResponseDto> res = func.apply(clientResponse);
-        ResponseDto responseDto = res.block();
-
-        assertThat(responseDto.bodyBytes()).isEqualTo(content);
-        assertThat(responseDto.headers()).isEqualTo(httpHeaders);
-
     }
 }

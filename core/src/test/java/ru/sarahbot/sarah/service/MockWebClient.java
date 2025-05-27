@@ -11,7 +11,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersUriSpec;
 
 import reactor.core.publisher.Mono;
-import ru.sarahbot.sarah.file.dto.ResponseDto;
+import ru.sarahbot.sarah.webclient.dto.ResponseDto;
 
 @SuppressWarnings("all")
 public class MockWebClient {

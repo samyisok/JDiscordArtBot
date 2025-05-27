@@ -7,24 +7,22 @@ import java.nio.file.Files;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HexFormat;
-import java.util.function.Function;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.ClientResponse;
-import org.springframework.web.reactive.function.client.WebClient;
 
-import reactor.core.publisher.Mono;
 import ru.sarahbot.sarah.exception.ValidationInputException;
-import ru.sarahbot.sarah.file.dto.ResponseDto;
+import ru.sarahbot.sarah.webclient.dto.ResponseDto;
+import ru.sarahbot.sarah.webclient.service.WebClientService;
 
 @Service
 public class FileDownloadService {
     private final Logger log = LoggerFactory.getLogger(getClass());
-    private final WebClient webClient;
+    private final WebClientService webClientService;
 
     @Value("${file.save.path}")
     private String saveDirectory;
@@ -33,8 +31,8 @@ public class FileDownloadService {
     @Value("${file.size.max:10000000}")
     private Long maxFileSize;
 
-    public FileDownloadService(WebClient webClient) {
-        this.webClient = webClient;
+    public FileDownloadService(WebClientService webClientService) {
+        this.webClientService = webClientService;
     }
 
     public File downloadAndSave(String url, String contentType, String username) {
@@ -44,7 +42,7 @@ public class FileDownloadService {
             throw new ValidationInputException("wrong params");
         }
 
-        ResponseDto responseDto = getResponseDto(url, getResponseFunc());
+        ResponseDto responseDto = webClientService.getResponseDto(url);
 
         HttpHeaders headers = responseDto.headers();
         log.info("Get headers: {}", headers);
@@ -55,21 +53,6 @@ public class FileDownloadService {
 
         String extension = getExtension(contentType);
         return saveFileToFs(extension, username, imageBytes);
-    }
-
-    ResponseDto getResponseDto(
-            String url, Function<ClientResponse, ? extends Mono<ResponseDto>> responseFunc) {
-        ResponseDto responseDto = webClient.get().uri(url).exchangeToMono(responseFunc).block();
-        return responseDto;
-    }
-
-    Function<ClientResponse, ? extends Mono<ResponseDto>> getResponseFunc() {
-        return res -> {
-            log.info("Status Code is: {}", res.statusCode());
-
-            HttpHeaders headers = res.headers().asHttpHeaders();
-            return res.bodyToMono(byte[].class).map(bytes -> new ResponseDto(bytes, headers));
-        };
     }
 
     String getExtension(String contentType) {

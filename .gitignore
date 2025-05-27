@@ -45,3 +45,7 @@ run.bat
 k8s/secrets/
 *.secret
 .env
+
+#github
+.github
+.github/*

@@ -1,4 +1,4 @@
-package ru.sarahbot.sarah.file.dto;
+package ru.sarahbot.sarah.webclient.dto;
 
 import org.springframework.http.HttpHeaders;
 
