@@ -23,6 +23,7 @@ public class WebClientService {
 
   public ResponseDto getResponseDto(
       String url) {
+    log.info("getting url: {}", url);
     ResponseDto responseDto =
         webClient.get().uri(url).exchangeToMono(getResponseFunc()).block();
     return responseDto;
