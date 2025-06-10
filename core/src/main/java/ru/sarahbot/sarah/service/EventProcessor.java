@@ -2,7 +2,7 @@ package ru.sarahbot.sarah.service;
 
 import java.util.List;
 import java.util.UUID;
-
+import net.dv8tion.jda.api.entities.emoji.Emoji;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.session.ReadyEvent;
@@ -11,6 +11,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import ru.sarahbot.sarah.limiter.RequestLimiterService;
 import ru.sarahbot.sarah.service.generator.DefaultExecuterService;
 import ru.sarahbot.sarah.service.generator.ExecuterGeneratorInterface;
 
@@ -20,11 +21,14 @@ public class EventProcessor extends ListenerAdapter {
 
     private final List<ExecuterGeneratorInterface> messageExecutersList;
     private final DefaultExecuterService defaultExecuterService;
+    private final RequestLimiterService requestLimiterService;
 
     public EventProcessor(DefaultExecuterService defaultExecuterService,
-            List<ExecuterGeneratorInterface> messageExecutersList) {
+            List<ExecuterGeneratorInterface> messageExecutersList,
+            RequestLimiterService requestLimiterService) {
         this.defaultExecuterService = defaultExecuterService;
         this.messageExecutersList = messageExecutersList;
+        this.requestLimiterService = requestLimiterService;
     }
 
     @Override
@@ -70,6 +74,11 @@ public class EventProcessor extends ListenerAdapter {
             return;
         }
 
+        if(!requestLimiterService.updateAndCheckIfItAboveLimit(event)) {
+              event.getMessage().addReaction(Emoji.fromUnicode("❌")).queue();
+              return;
+        }
+
         UUID uuid = UUID.randomUUID();
 
         log.info("Get event: {}, {}", uuid.toString(), content);
@@ -79,6 +88,7 @@ public class EventProcessor extends ListenerAdapter {
                 .name("onMessageReceived_"
                         + "_" + uuid.toString())
                 .start(() -> executor.execute(event));
+
         log.info("executer: {}, event: {}, {}, {}, {}", executor.getClass().getCanonicalName(),
                 event.getAuthor().getGlobalName(),
                 event.getChannel().getName(), event.getGuild().getName(), event.getMessage().getContentDisplay());
