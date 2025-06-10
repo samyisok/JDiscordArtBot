@@ -3,8 +3,11 @@ package ru.sarahbot.sarah.anime.services;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -55,10 +58,12 @@ public class RandomAnimeServiceTest {
     ReflectionTestUtils.setField(randomAnimeService, "random", mockRandom);
 
     AnimeItemDto animeItemDto = new AnimeItemDto(new AnimeItemDto.AnimeAttributesDto(
-        new AnimeItemDto.AnimeAttributesDto.AnimePosterImageDto(link1), new AnimeItemDto.AnimeAttributesDto.AnimeTitlesDto("title")));
+        new AnimeItemDto.AnimeAttributesDto.AnimePosterImageDto(link1),
+        new AnimeItemDto.AnimeAttributesDto.AnimeTitlesDto("title")));
 
     animeResponseDto = new AnimeResponseDto(List.of(animeItemDto));
-    responseDto = new ResponseDto(objectMapper.writeValueAsString(animeResponseDto).getBytes(), httpHeaders);
+    responseDto = new ResponseDto(
+        objectMapper.writeValueAsString(animeResponseDto).getBytes(), httpHeaders);
 
     when(webClientService.getResponseDto(EXPECTED_URL)).thenReturn(responseDto);
   }
