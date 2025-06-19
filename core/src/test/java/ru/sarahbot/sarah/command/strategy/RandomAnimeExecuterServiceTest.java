@@ -1,4 +1,4 @@
-package ru.sarahbot.sarah.service.generator;
+package ru.sarahbot.sarah.command.strategy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -17,8 +17,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import ru.sarahbot.sarah.anime.services.RandomAnimeService;
-import ru.sarahbot.sarah.service.MockJdaEvent;
-import ru.sarahbot.sarah.service.MockJdaEvent.MockedEventContext;
+import ru.sarahbot.sarah.command.MockJdaEvent;
+import ru.sarahbot.sarah.command.MockJdaEvent.MockedEventContext;
+import ru.sarahbot.sarah.command.strategy.RandomAnimeExecuterService;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)

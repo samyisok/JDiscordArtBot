@@ -39,7 +39,7 @@ import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import reactor.core.publisher.Mono;
-import ru.sarahbot.sarah.service.MockWebClient;
+import ru.sarahbot.sarah.command.MockWebClient;
 import ru.sarahbot.sarah.webclient.dto.ResponseDto;
 import ru.sarahbot.sarah.webclient.service.WebClientService;
 

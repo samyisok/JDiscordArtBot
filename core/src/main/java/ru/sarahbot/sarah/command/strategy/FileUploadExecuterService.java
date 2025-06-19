@@ -1,4 +1,4 @@
-package ru.sarahbot.sarah.service.generator;
+package ru.sarahbot.sarah.command.strategy;
 
 import java.util.Set;
 import java.util.UUID;

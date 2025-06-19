@@ -1,4 +1,4 @@
-package ru.sarahbot.sarah.service.generator;
+package ru.sarahbot.sarah.command.strategy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
@@ -13,10 +13,10 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
-
+import ru.sarahbot.sarah.command.MockJdaEvent;
+import ru.sarahbot.sarah.command.MockJdaEvent.MockedEventContext;
+import ru.sarahbot.sarah.command.strategy.WaifuCreatorExecuterService;
 import ru.sarahbot.sarah.file.service.WaifuCreatorService;
-import ru.sarahbot.sarah.service.MockJdaEvent;
-import ru.sarahbot.sarah.service.MockJdaEvent.MockedEventContext;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)

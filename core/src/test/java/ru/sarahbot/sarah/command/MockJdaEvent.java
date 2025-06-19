@@ -1,4 +1,4 @@
-package ru.sarahbot.sarah.service;
+package ru.sarahbot.sarah.command;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;

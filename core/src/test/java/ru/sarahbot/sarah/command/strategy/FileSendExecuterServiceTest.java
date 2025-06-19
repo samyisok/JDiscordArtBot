@@ -1,4 +1,4 @@
-package ru.sarahbot.sarah.service.generator;
+package ru.sarahbot.sarah.command.strategy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doCallRealMethod;
@@ -26,11 +26,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import org.springframework.test.util.ReflectionTestUtils;
-
+import ru.sarahbot.sarah.command.MockJdaEvent;
+import ru.sarahbot.sarah.command.MockJdaEvent.MockedEventContext;
+import ru.sarahbot.sarah.command.strategy.FileSendExecuterService;
 import ru.sarahbot.sarah.file.dto.FileEntity;
 import ru.sarahbot.sarah.file.service.FileService;
-import ru.sarahbot.sarah.service.MockJdaEvent;
-import ru.sarahbot.sarah.service.MockJdaEvent.MockedEventContext;
 
 @SuppressWarnings("all")
 @ExtendWith(MockitoExtension.class)

@@ -1,4 +1,4 @@
-package ru.sarahbot.sarah.service.generator;
+package ru.sarahbot.sarah.command.strategy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatException;
@@ -22,9 +22,10 @@ import org.mockito.quality.Strictness;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import net.dv8tion.jda.api.entities.emoji.Emoji;
+import ru.sarahbot.sarah.command.MockJdaEvent;
+import ru.sarahbot.sarah.command.MockJdaEvent.MockedEventContext;
+import ru.sarahbot.sarah.command.strategy.FileUploadExecuterService;
 import ru.sarahbot.sarah.file.service.FileService;
-import ru.sarahbot.sarah.service.MockJdaEvent;
-import ru.sarahbot.sarah.service.MockJdaEvent.MockedEventContext;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)

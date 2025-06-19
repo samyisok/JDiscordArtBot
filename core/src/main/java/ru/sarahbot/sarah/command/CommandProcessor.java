@@ -1,4 +1,4 @@
-package ru.sarahbot.sarah.service;
+package ru.sarahbot.sarah.command;
 
 import java.util.List;
 import java.util.UUID;
@@ -11,19 +11,19 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import ru.sarahbot.sarah.command.strategy.DefaultExecuterService;
+import ru.sarahbot.sarah.command.strategy.ExecuterGeneratorInterface;
 import ru.sarahbot.sarah.limiter.RequestLimiterService;
-import ru.sarahbot.sarah.service.generator.DefaultExecuterService;
-import ru.sarahbot.sarah.service.generator.ExecuterGeneratorInterface;
 
 @Service
-public class EventProcessor extends ListenerAdapter {
+public class CommandProcessor extends ListenerAdapter {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     private final List<ExecuterGeneratorInterface> messageExecutersList;
     private final DefaultExecuterService defaultExecuterService;
     private final RequestLimiterService requestLimiterService;
 
-    public EventProcessor(DefaultExecuterService defaultExecuterService,
+    public CommandProcessor(DefaultExecuterService defaultExecuterService,
             List<ExecuterGeneratorInterface> messageExecutersList,
             RequestLimiterService requestLimiterService) {
         this.defaultExecuterService = defaultExecuterService;

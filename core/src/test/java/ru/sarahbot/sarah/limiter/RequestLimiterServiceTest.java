@@ -19,8 +19,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.springframework.test.util.ReflectionTestUtils;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import ru.sarahbot.sarah.command.MockJdaEvent;
 import ru.sarahbot.sarah.limiter.RequestLimiterService.LimitRecord;
-import ru.sarahbot.sarah.service.MockJdaEvent;
 
 
 @SuppressWarnings("all")
