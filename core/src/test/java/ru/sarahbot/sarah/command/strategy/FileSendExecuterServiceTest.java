@@ -71,7 +71,7 @@ public class FileSendExecuterServiceTest {
 
     @Test
     void testExecute() {
-        MockedEventContext event = MockJdaEvent.mockMessageEvent("!help");
+        MockedEventContext event = MockJdaEvent.mockMessageEvent("help");
 
         fileSendExecuterService.execute(event.messageReceivedEvent());
 
@@ -107,12 +107,12 @@ public class FileSendExecuterServiceTest {
     @DisplayName("isExecuterAvailable is true")
     @Test
     void testIsExecuterAvailableTrue() {
-        assertThat(fileSendExecuterService.isExecuterAvailable("!help")).isTrue();
+        assertThat(fileSendExecuterService.isExecuterAvailable("help")).isTrue();
     }
 
     @DisplayName("isExecuterAvailable is false")
     @Test
     void testIsExecuterAvailableFalse() {
-        assertThat(fileSendExecuterService.isExecuterAvailable("!ping")).isFalse();
+        assertThat(fileSendExecuterService.isExecuterAvailable("ping")).isFalse();
     }
 }

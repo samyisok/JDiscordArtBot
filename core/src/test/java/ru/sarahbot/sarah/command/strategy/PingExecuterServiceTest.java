@@ -25,7 +25,7 @@ public class PingExecuterServiceTest {
     @DisplayName("execute main")
     @Test
     void testExecute() {
-        MockedEventContext event = MockJdaEvent.mockMessageEvent("!ping");
+        MockedEventContext event = MockJdaEvent.mockMessageEvent("ping");
 
         pingExecuterService.execute(event.messageReceivedEvent());
 
@@ -37,12 +37,12 @@ public class PingExecuterServiceTest {
     @DisplayName("isExecuterAvailable is true")
     @Test
     void testIsExecuterAvailableTrue() {
-        assertThat(pingExecuterService.isExecuterAvailable("!ping")).isTrue();
+        assertThat(pingExecuterService.isExecuterAvailable("ping")).isTrue();
     }
 
     @DisplayName("isExecuterAvailable is false")
     @Test
     void testIsExecuterAvailableFalse() {
-        assertThat(pingExecuterService.isExecuterAvailable("!help")).isFalse();
+        assertThat(pingExecuterService.isExecuterAvailable("help")).isFalse();
     }
 }

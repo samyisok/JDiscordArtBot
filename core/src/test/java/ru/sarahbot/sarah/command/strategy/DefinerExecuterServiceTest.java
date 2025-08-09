@@ -26,7 +26,7 @@ public class DefinerExecuterServiceTest {
     private DefinerExecuterService definerExecuterService;
 
     @ParameterizedTest
-    @CsvSource({ "!это точно, true", "!эти, true", "!эта, true", "!%, true,", "!help, false" })
+    @CsvSource({ "это точно, true", "эти, true", "эта, true", "!, true,", "help, false" })
     void testExecute(String message, Boolean isTrue) {
         assertThat(definerExecuterService.isExecuterAvailable(message)).isEqualTo(isTrue);
     }

@@ -10,7 +10,7 @@ import ru.sarahbot.sarah.artstation.service.ArtstationService;
 @Service
 public class ArtStationExecuterService implements ExecuterGeneratorInterface {
   private final Logger log = LoggerFactory.getLogger(getClass());
-  private static final Set<String> MESSAGES = Set.of("!art");
+  private static final Set<String> MESSAGES = Set.of("art");
   private final ArtstationService artstationService;
 
   public ArtStationExecuterService(ArtstationService artstationService) {

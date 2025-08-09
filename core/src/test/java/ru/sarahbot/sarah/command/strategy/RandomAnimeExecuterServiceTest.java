@@ -39,13 +39,13 @@ public class RandomAnimeExecuterServiceTest {
 
   @Test
   void testIsExecuterAvailableWithValidCommand() {
-    assertThat(randomAnimeExecuterService.isExecuterAvailable("!anime")).isTrue();
-    assertThat(randomAnimeExecuterService.isExecuterAvailable("!anime something")).isTrue();
+    assertThat(randomAnimeExecuterService.isExecuterAvailable("anime")).isTrue();
+    assertThat(randomAnimeExecuterService.isExecuterAvailable("anime something")).isTrue();
   }
 
   @Test
   void testIsExecuterAvailableWithInvalidCommand() {
-    assertThat(randomAnimeExecuterService.isExecuterAvailable("!notanime")).isFalse();
+    assertThat(randomAnimeExecuterService.isExecuterAvailable("notanime")).isFalse();
     assertThat(randomAnimeExecuterService.isExecuterAvailable("hello")).isFalse();
     assertThat(randomAnimeExecuterService.isExecuterAvailable("")).isFalse();
   }
@@ -56,7 +56,7 @@ public class RandomAnimeExecuterServiceTest {
     String anime = "some anime url";
     when(randomAnimeService.getRandomAnime()).thenReturn(anime);
 
-    MockedEventContext event = MockJdaEvent.mockMessageEvent("!anime");
+    MockedEventContext event = MockJdaEvent.mockMessageEvent("anime");
     randomAnimeExecuterService.execute(event.messageReceivedEvent());
 
     verify(event.messageReceivedEvent()).getMessage();
@@ -69,7 +69,7 @@ public class RandomAnimeExecuterServiceTest {
   void testExecuteWithNullAnime() {
     when(randomAnimeService.getRandomAnime()).thenReturn(null);
 
-    MockedEventContext event = MockJdaEvent.mockMessageEvent("!anime");
+    MockedEventContext event = MockJdaEvent.mockMessageEvent("anime");
     randomAnimeExecuterService.execute(event.messageReceivedEvent());
 
     verify(event.messageReceivedEvent(), never()).getMessage();

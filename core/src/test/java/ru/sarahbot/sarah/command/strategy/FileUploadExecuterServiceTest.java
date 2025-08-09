@@ -24,7 +24,6 @@ import org.springframework.test.util.ReflectionTestUtils;
 import net.dv8tion.jda.api.entities.emoji.Emoji;
 import ru.sarahbot.sarah.command.MockJdaEvent;
 import ru.sarahbot.sarah.command.MockJdaEvent.MockedEventContext;
-import ru.sarahbot.sarah.command.strategy.FileUploadExecuterService;
 import ru.sarahbot.sarah.file.service.FileService;
 
 @ExtendWith(MockitoExtension.class)
@@ -52,7 +51,7 @@ public class FileUploadExecuterServiceTest {
 
     @Test
     void testExecute() {
-        MockedEventContext context = MockJdaEvent.mockMessageEvent("!addhelp");
+        MockedEventContext context = MockJdaEvent.mockMessageEvent("addhelp");
 
         fileUploadExecuterService.execute(context.messageReceivedEvent());
 
@@ -77,13 +76,13 @@ public class FileUploadExecuterServiceTest {
     @DisplayName("isExecuterAvailable is true")
     @Test
     void testIsExecuterAvailableTrue() {
-        assertThat(fileUploadExecuterService.isExecuterAvailable("!addhelp")).isTrue();
+        assertThat(fileUploadExecuterService.isExecuterAvailable("addhelp")).isTrue();
     }
 
     @DisplayName("isExecuterAvailable is false")
     @Test
     void testIsExecuterAvailableFalse() {
-        assertThat(fileUploadExecuterService.isExecuterAvailable("!help")).isFalse();
+        assertThat(fileUploadExecuterService.isExecuterAvailable("help")).isFalse();
     }
 
     @ParameterizedTest

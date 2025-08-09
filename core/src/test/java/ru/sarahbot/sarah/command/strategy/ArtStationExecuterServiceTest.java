@@ -18,7 +18,6 @@ import org.mockito.quality.Strictness;
 import ru.sarahbot.sarah.artstation.service.ArtstationService;
 import ru.sarahbot.sarah.command.MockJdaEvent;
 import ru.sarahbot.sarah.command.MockJdaEvent.MockedEventContext;
-import ru.sarahbot.sarah.command.strategy.ArtStationExecuterService;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -39,8 +38,8 @@ public class ArtStationExecuterServiceTest {
 
   @Test
   void testIsExecuterAvailableWithValidCommand() {
-    assertThat(artStationExecuterService.isExecuterAvailable("!art")).isTrue();
-    assertThat(artStationExecuterService.isExecuterAvailable("!art something")).isTrue();
+    assertThat(artStationExecuterService.isExecuterAvailable("art")).isTrue();
+    assertThat(artStationExecuterService.isExecuterAvailable("art something")).isTrue();
   }
 
   @Test
@@ -56,7 +55,7 @@ public class ArtStationExecuterServiceTest {
     String art = "some art url";
     when(artstationService.getCachedRandomArt()).thenReturn(art);
 
-    MockedEventContext event = MockJdaEvent.mockMessageEvent("!art");
+    MockedEventContext event = MockJdaEvent.mockMessageEvent("art");
     artStationExecuterService.execute(event.messageReceivedEvent());
 
     verify(event.messageReceivedEvent()).getMessage();
@@ -69,7 +68,7 @@ public class ArtStationExecuterServiceTest {
   void testExecuteWithNullArt() {
     when(artstationService.getCachedRandomArt()).thenReturn(null);
 
-    MockedEventContext event = MockJdaEvent.mockMessageEvent("!art");
+    MockedEventContext event = MockJdaEvent.mockMessageEvent("art");
     artStationExecuterService.execute(event.messageReceivedEvent());
 
     verify(event.messageReceivedEvent(), never()).getMessage();

@@ -33,7 +33,7 @@ public class WaifuCreatorExecuterServiceTest {
     void testExecute() {
         when(waifuCreatorService.generate()).thenReturn(MESSAGE);
 
-        MockedEventContext event = MockJdaEvent.mockMessageEvent("!waifu");
+        MockedEventContext event = MockJdaEvent.mockMessageEvent("waifu");
 
         waifuCreatorExecuterService.execute(event.messageReceivedEvent());
 
@@ -47,12 +47,12 @@ public class WaifuCreatorExecuterServiceTest {
     @DisplayName("isExecuterAvailable is true")
     @Test
     void testIsExecuterAvailableTrue() {
-        assertThat(waifuCreatorExecuterService.isExecuterAvailable("!waifu")).isTrue();
+        assertThat(waifuCreatorExecuterService.isExecuterAvailable("waifu")).isTrue();
     }
 
     @DisplayName("isExecuterAvailable is false")
     @Test
     void testIsExecuterAvailableFalse() {
-        assertThat(waifuCreatorExecuterService.isExecuterAvailable("!help")).isFalse();
+        assertThat(waifuCreatorExecuterService.isExecuterAvailable("help")).isFalse();
     }
 }

@@ -31,7 +31,7 @@ public class FileUploadExecuterService implements ExecuterGeneratorInterface {
     @Value("${validationsfile.file.size.max:10000000}")
     private Long maxFileSize;
 
-    private static final Set<String> MESSAGES = Set.of("!addhelp");
+    private static final Set<String> MESSAGES = Set.of("addhelp");
 
     public FileUploadExecuterService(FileService fileService) {
         this.fileService = fileService;

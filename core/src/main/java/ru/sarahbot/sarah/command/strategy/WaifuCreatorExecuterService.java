@@ -10,7 +10,7 @@ import ru.sarahbot.sarah.file.service.WaifuCreatorService;
 @Service
 public class WaifuCreatorExecuterService implements ExecuterGeneratorInterface {
 
-    private static final Set<String> MESSAGES = Set.of("!waifu");
+    private static final Set<String> MESSAGES = Set.of("waifu");
     private final WaifuCreatorService waifuCreatorService;
 
     public WaifuCreatorExecuterService(WaifuCreatorService waifuCreatorService) {

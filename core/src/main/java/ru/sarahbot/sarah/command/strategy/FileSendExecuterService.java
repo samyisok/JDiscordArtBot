@@ -25,7 +25,7 @@ public class FileSendExecuterService implements ExecuterGeneratorInterface {
     private String saveDirectory;
 
     private final FileService fileService;
-    private static final Set<String> MESSAGES = Set.of("!help", "!херп", "!хелп");
+    private static final Set<String> MESSAGES = Set.of("help", "херп", "хелп");
 
     public FileSendExecuterService(FileService fileService) {
         this.fileService = fileService;

@@ -10,6 +10,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.sarahbot.sarah.command.strategy.DefaultExecuterService;
 import ru.sarahbot.sarah.command.strategy.ExecuterGeneratorInterface;
@@ -22,6 +23,10 @@ public class CommandProcessor extends ListenerAdapter {
     private final List<ExecuterGeneratorInterface> messageExecutersList;
     private final DefaultExecuterService defaultExecuterService;
     private final RequestLimiterService requestLimiterService;
+
+    @Value("${command.prefix:%}")
+    private String prefix;
+    
 
     public CommandProcessor(DefaultExecuterService defaultExecuterService,
             List<ExecuterGeneratorInterface> messageExecutersList,
@@ -68,7 +73,7 @@ public class CommandProcessor extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent event) {
         String content = event.getMessage().getContentRaw();
         // Ignore bot messages
-        if (!content.startsWith("!")
+        if (!content.startsWith(prefix)
                 || event.getAuthor().isBot()
                 || event.getAuthor().getGlobalName() == null) {
             return;
@@ -82,7 +87,7 @@ public class CommandProcessor extends ListenerAdapter {
         UUID uuid = UUID.randomUUID();
 
         log.info("Get event: {}, {}", uuid.toString(), content);
-        ExecuterGeneratorInterface executor = getExecuter(content);
+        ExecuterGeneratorInterface executor = getExecuter(content.substring(1));
 
         Thread.ofVirtual()
                 .name("onMessageReceived_"

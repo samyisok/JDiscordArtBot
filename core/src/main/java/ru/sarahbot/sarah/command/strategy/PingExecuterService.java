@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PingExecuterService implements ExecuterGeneratorInterface {
-    private static final Set<String> MESSAGES = Set.of("!ping", "!пинг");
+    private static final Set<String> MESSAGES = Set.of("ping", "пинг");
 
     @Override
     public Boolean isExecuterAvailable(String message) {
