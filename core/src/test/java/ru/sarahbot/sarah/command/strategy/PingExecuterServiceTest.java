@@ -45,4 +45,14 @@ public class PingExecuterServiceTest {
     void testIsExecuterAvailableFalse() {
         assertThat(pingExecuterService.isExecuterAvailable("help")).isFalse();
     }
+
+    @Test
+    void testGetDescriptionShouldReturnFormattedDescription() {
+        String prefix = "%";
+        String expected = "%ping, %пинг - Get pong from the bot.";
+
+        String result = pingExecuterService.getDescription(prefix);
+
+        assertThat(result).isEqualTo(expected);
+    }
 }

@@ -1,6 +1,7 @@
 package ru.sarahbot.sarah.command.strategy;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import ru.sarahbot.sarah.artstation.service.ArtstationService;
 public class ArtStationExecuterService implements ExecuterGeneratorInterface {
   private final Logger log = LoggerFactory.getLogger(getClass());
   private static final Set<String> MESSAGES = Set.of("art");
+  private static final String DESCRIPTION = "Get top image from Artstation.";
   private final ArtstationService artstationService;
 
   public ArtStationExecuterService(ArtstationService artstationService) {
@@ -34,5 +36,14 @@ public class ArtStationExecuterService implements ExecuterGeneratorInterface {
     }
 
     event.getMessage().reply(top).queue();
+  }
+
+  @Override
+  public String getDescription(String prefix) {
+    return MESSAGES.stream()
+        .sorted()
+        .map(m -> prefix + m)
+        .collect(Collectors.joining(", "))
+        + " - " + DESCRIPTION;
   }
 }

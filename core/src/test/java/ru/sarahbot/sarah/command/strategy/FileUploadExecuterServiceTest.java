@@ -132,4 +132,14 @@ public class FileUploadExecuterServiceTest {
     void validateContentTypeExceptionIfNull() {
         assertThatException().isThrownBy(() -> fileUploadExecuterService.validateContentType(null));
     }
+
+    @Test
+    void testGetDescriptionShouldReturnFormattedDescription() {
+        String prefix = "%";
+        String expected = "%addhelp - Upload help image.";
+
+        String result = fileUploadExecuterService.getDescription(prefix);
+
+        assertThat(result).isEqualTo(expected);
+    }
 }

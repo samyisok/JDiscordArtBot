@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Set;
-
+import java.util.stream.Collectors;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.utils.FileUpload;
 
@@ -20,12 +20,13 @@ import ru.sarahbot.sarah.file.service.FileService;
 @Service
 public class FileSendExecuterService implements ExecuterGeneratorInterface {
     private final Logger log = LoggerFactory.getLogger(getClass());
+    private static final Set<String> MESSAGES = Set.of("help", "херп", "хелп");
+    private static final String DESCRIPTION = "Get help image.";
 
     @Value("${file.save.path}")
     private String saveDirectory;
 
     private final FileService fileService;
-    private static final Set<String> MESSAGES = Set.of("help", "херп", "хелп");
 
     public FileSendExecuterService(FileService fileService) {
         this.fileService = fileService;
@@ -34,6 +35,15 @@ public class FileSendExecuterService implements ExecuterGeneratorInterface {
     @Override
     public Boolean isExecuterAvailable(String message) {
         return MESSAGES.contains(message);
+    }
+
+    @Override
+    public String getDescription(String prefix) {
+        return MESSAGES.stream()
+        .sorted()
+        .map(m -> prefix + m)
+        .collect(Collectors.joining(", "))
+                + " - " + DESCRIPTION;
     }
 
     @Override

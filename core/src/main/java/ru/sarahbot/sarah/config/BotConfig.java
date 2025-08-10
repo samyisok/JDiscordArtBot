@@ -32,7 +32,9 @@ public class BotConfig {
                 .build()
                 .awaitReady(); // waits until bot is ready
 
-        jda.updateCommands().addCommands(Commands.slash("ping", "Calculate ping of the bot")).queue();
+        jda.updateCommands()
+                .addCommands(Commands.slash("list", "Get list of commands"))
+                .queue();
 
         return jda;
     }

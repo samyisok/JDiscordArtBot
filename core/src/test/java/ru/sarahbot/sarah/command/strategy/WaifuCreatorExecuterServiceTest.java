@@ -55,4 +55,14 @@ public class WaifuCreatorExecuterServiceTest {
     void testIsExecuterAvailableFalse() {
         assertThat(waifuCreatorExecuterService.isExecuterAvailable("help")).isFalse();
     }
+
+    @Test
+    void testGetDescriptionShouldReturnFormattedDescription() {
+        String prefix = "%";
+        String expected = "%waifu - Generate waifu.";
+
+        String result = waifuCreatorExecuterService.getDescription(prefix);
+
+        assertThat(result).isEqualTo(expected);
+    }
 }

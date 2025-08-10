@@ -25,55 +25,67 @@ import ru.sarahbot.sarah.command.strategy.RandomAnimeExecuterService;
 @MockitoSettings(strictness = Strictness.LENIENT)
 public class RandomAnimeExecuterServiceTest {
 
-  @Mock
-  RandomAnimeService randomAnimeService;
+    @Mock
+    RandomAnimeService randomAnimeService;
 
-  @Spy
-  @InjectMocks
-  RandomAnimeExecuterService randomAnimeExecuterService;
+    @Spy
+    @InjectMocks
+    RandomAnimeExecuterService randomAnimeExecuterService;
 
-  @BeforeEach
-  void before() {
-    // No-op: common setup if needed
-  }
+    @BeforeEach
+    void before() {
+        // No-op: common setup if needed
+    }
 
-  @Test
-  void testIsExecuterAvailableWithValidCommand() {
-    assertThat(randomAnimeExecuterService.isExecuterAvailable("anime")).isTrue();
-    assertThat(randomAnimeExecuterService.isExecuterAvailable("anime something")).isTrue();
-  }
+    @Test
+    void testIsExecuterAvailableWithValidCommand() {
+        assertThat(randomAnimeExecuterService.isExecuterAvailable("anime")).isTrue();
+        assertThat(randomAnimeExecuterService.isExecuterAvailable("anime something"))
+                .isTrue();
+    }
 
-  @Test
-  void testIsExecuterAvailableWithInvalidCommand() {
-    assertThat(randomAnimeExecuterService.isExecuterAvailable("notanime")).isFalse();
-    assertThat(randomAnimeExecuterService.isExecuterAvailable("hello")).isFalse();
-    assertThat(randomAnimeExecuterService.isExecuterAvailable("")).isFalse();
-  }
+    @Test
+    void testIsExecuterAvailableWithInvalidCommand() {
+        assertThat(randomAnimeExecuterService.isExecuterAvailable("notanime"))
+                .isFalse();
+        assertThat(randomAnimeExecuterService.isExecuterAvailable("hello")).isFalse();
+        assertThat(randomAnimeExecuterService.isExecuterAvailable("")).isFalse();
+    }
 
-  @Test
-  @DisplayName("execute should reply with anime when randomAnimeService returns anime")
-  void testExecuteWithAnime() {
-    String anime = "some anime url";
-    when(randomAnimeService.getRandomAnime()).thenReturn(anime);
+    @Test
+    @DisplayName("execute should reply with anime when randomAnimeService returns anime")
+    void testExecuteWithAnime() {
+        String anime = "some anime url";
+        when(randomAnimeService.getRandomAnime()).thenReturn(anime);
 
-    MockedEventContext event = MockJdaEvent.mockMessageEvent("anime");
-    randomAnimeExecuterService.execute(event.messageReceivedEvent());
+        MockedEventContext event = MockJdaEvent.mockMessageEvent("anime");
+        randomAnimeExecuterService.execute(event.messageReceivedEvent());
 
-    verify(event.messageReceivedEvent()).getMessage();
-    verify(event.message()).reply(anime);
-    verify(event.messageCreateAction()).queue();
-  }
+        verify(event.messageReceivedEvent()).getMessage();
+        verify(event.message()).reply(anime);
+        verify(event.messageCreateAction()).queue();
+    }
 
-  @Test
-  @DisplayName("execute should not reply when randomAnimeService returns null")
-  void testExecuteWithNullAnime() {
-    when(randomAnimeService.getRandomAnime()).thenReturn(null);
+    @Test
+    @DisplayName("execute should not reply when randomAnimeService returns null")
+    void testExecuteWithNullAnime() {
+        when(randomAnimeService.getRandomAnime()).thenReturn(null);
 
-    MockedEventContext event = MockJdaEvent.mockMessageEvent("anime");
-    randomAnimeExecuterService.execute(event.messageReceivedEvent());
+        MockedEventContext event = MockJdaEvent.mockMessageEvent("anime");
+        randomAnimeExecuterService.execute(event.messageReceivedEvent());
 
-    verify(event.messageReceivedEvent(), never()).getMessage();
-    verify(event.message(), never()).reply(anyString());
-    verify(event.messageCreateAction(), never()).queue();
-  }
+        verify(event.messageReceivedEvent(), never()).getMessage();
+        verify(event.message(), never()).reply(anyString());
+        verify(event.messageCreateAction(), never()).queue();
+    }
+
+    @Test
+    void testGetDescriptionShouldReturnFormattedDescription() {
+        String prefix = "%";
+        String expected = "%anime - Get Random anime image.";
+
+        String result = randomAnimeExecuterService.getDescription(prefix);
+
+        assertThat(result).isEqualTo(expected);
+    }
 }

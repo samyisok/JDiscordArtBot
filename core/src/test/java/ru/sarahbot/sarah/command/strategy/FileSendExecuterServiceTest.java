@@ -115,4 +115,14 @@ public class FileSendExecuterServiceTest {
     void testIsExecuterAvailableFalse() {
         assertThat(fileSendExecuterService.isExecuterAvailable("ping")).isFalse();
     }
+
+    @Test
+    void testGetDescriptionShouldReturnFormattedDescription() {
+        String prefix = "%";
+        String expected = "%help, %хелп, %херп - Get help image.";
+
+        String result = fileSendExecuterService.getDescription(prefix);
+
+        assertThat(result).isEqualTo(expected);
+    }
 }

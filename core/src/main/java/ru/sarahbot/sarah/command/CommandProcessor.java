@@ -2,6 +2,7 @@ package ru.sarahbot.sarah.command;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import net.dv8tion.jda.api.entities.emoji.Emoji;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -45,21 +46,18 @@ public class CommandProcessor extends ListenerAdapter {
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
         // make sure we handle the right command
         switch (event.getName()) {
-            case "ping" -> {
-                long time = System.currentTimeMillis();
-                event
-                        .reply("Pong!")
-                        .setEphemeral(true) // reply or acknowledge
-                        .flatMap(
-                                v -> event
-                                        .getHook()
-                                        .editOriginalFormat(
-                                                "Pong: %d ms", System.currentTimeMillis() - time) // then edit original
-                        )
-                        .queue(); // Queue both reply and edit
+            case "list" -> {
+                event.reply(getListOfCommands()).setEphemeral(true).queue();
             }
             default -> System.out.printf("Unknown command %s used by %#s%n", event.getName(), event.getUser());
         }
+    }
+
+    private String getListOfCommands(){
+        return messageExecutersList.stream()
+        .map( me -> me.getDescription(prefix) )
+        .filter( s -> s != null )
+        .collect(Collectors.joining("\n"));
     }
 
     private ExecuterGeneratorInterface getExecuter(String message) {

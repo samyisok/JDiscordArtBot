@@ -41,4 +41,14 @@ public class DefinerExecuterServiceTest {
         assertThat(DefinerExecuterService.ANSWERS.contains(argumentCaptor.getValue())).isTrue();
         verify(event.messageCreateAction()).queue();
     }
+
+    @Test
+    void testGetDescriptionShouldReturnFormattedDescription() {
+        String prefix = "%";
+        String expected = "%!, %эта, %эти, %это - Get answer for the question.";
+
+        String result = definerExecuterService.getDescription(prefix);
+
+        assertThat(result).isEqualTo(expected);
+    }
 }

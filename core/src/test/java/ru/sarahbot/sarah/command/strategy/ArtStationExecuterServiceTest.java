@@ -75,4 +75,14 @@ public class ArtStationExecuterServiceTest {
     verify(event.message(), never()).reply(anyString());
     verify(event.messageCreateAction(), never()).queue();
   }
+
+  @Test
+  void testGetDescriptionShouldReturnFormattedDescription() {
+    String prefix = "%";
+    String expected = "%art - Get top image from Artstation.";
+
+    String result = artStationExecuterService.getDescription(prefix);
+
+    assertThat(result).isEqualTo(expected);
+  }
 }

@@ -2,7 +2,7 @@ package ru.sarahbot.sarah.command.strategy;
 
 import java.util.Set;
 import java.util.UUID;
-
+import java.util.stream.Collectors;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.Message.Attachment;
 import net.dv8tion.jda.api.entities.emoji.Emoji;
@@ -23,6 +23,8 @@ import ru.sarahbot.sarah.file.service.FileService;
 public class FileUploadExecuterService implements ExecuterGeneratorInterface {
     private final Logger log = LoggerFactory.getLogger(getClass());
     private final FileService fileService;
+    private static final String DESCRIPTION = "Upload help image.";
+    private static final Set<String> MESSAGES = Set.of("addhelp");
 
     @Value("${validations.file.namesize.max:64}")
     private Long maxFileName;
@@ -31,7 +33,6 @@ public class FileUploadExecuterService implements ExecuterGeneratorInterface {
     @Value("${validationsfile.file.size.max:10000000}")
     private Long maxFileSize;
 
-    private static final Set<String> MESSAGES = Set.of("addhelp");
 
     public FileUploadExecuterService(FileService fileService) {
         this.fileService = fileService;
@@ -40,6 +41,15 @@ public class FileUploadExecuterService implements ExecuterGeneratorInterface {
     @Override
     public Boolean isExecuterAvailable(String message) {
         return MESSAGES.contains(message);
+    }
+
+    @Override
+    public String getDescription(String prefix) {
+        return MESSAGES.stream()
+                .sorted()
+                .map(m -> prefix + m)
+                .collect(Collectors.joining(", "))
+                + " - " + DESCRIPTION;
     }
 
     @Override
@@ -86,7 +96,8 @@ public class FileUploadExecuterService implements ExecuterGeneratorInterface {
     }
 
     void validateContentType(String contentType) {
-        if (contentType == null || contentType.isEmpty() || getExtension(contentType) == null) {
+        if (contentType == null || contentType.isEmpty()
+                || getExtension(contentType) == null) {
             throw new ValidationInputException("Wrong File Name");
         }
     }

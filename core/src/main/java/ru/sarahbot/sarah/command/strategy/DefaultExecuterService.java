@@ -17,7 +17,14 @@ public class DefaultExecuterService implements ExecuterGeneratorInterface {
 
     @Override
     public void execute(MessageReceivedEvent event) {
-        log.error("Unexpected call of default executer, event: {}, {}, {}, {}", event.getAuthor().getGlobalName(),
-                event.getChannel().getName(), event.getGuild().getName(), event.getMessage().getContentDisplay());
+        log.error("Unexpected call of default executer, event: {}, {}, {}, {}",
+                event.getAuthor().getGlobalName(),
+                event.getChannel().getName(), event.getGuild().getName(),
+                event.getMessage().getContentDisplay());
+    }
+
+    @Override
+    public String getDescription(String prefix) {
+        return null;
     }
 }

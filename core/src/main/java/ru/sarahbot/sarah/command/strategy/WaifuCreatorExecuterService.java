@@ -1,7 +1,7 @@
 package ru.sarahbot.sarah.command.strategy;
 
 import java.util.Set;
-
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -11,6 +11,7 @@ import ru.sarahbot.sarah.file.service.WaifuCreatorService;
 public class WaifuCreatorExecuterService implements ExecuterGeneratorInterface {
 
     private static final Set<String> MESSAGES = Set.of("waifu");
+    private static final String DESCRIPTION = "Generate waifu.";
     private final WaifuCreatorService waifuCreatorService;
 
     public WaifuCreatorExecuterService(WaifuCreatorService waifuCreatorService) {
@@ -23,10 +24,17 @@ public class WaifuCreatorExecuterService implements ExecuterGeneratorInterface {
     }
 
     @Override
+    public String getDescription(String prefix) {
+        return MESSAGES.stream()
+                .sorted()
+                .map(m -> prefix + m)
+                .collect(Collectors.joining(", "))
+                + " - " + DESCRIPTION;
+    }
+
+    @Override
     public void execute(MessageReceivedEvent event) {
-
         String waifu = waifuCreatorService.generate();
-
         event.getMessage().reply(waifu).queue();
     }
 
