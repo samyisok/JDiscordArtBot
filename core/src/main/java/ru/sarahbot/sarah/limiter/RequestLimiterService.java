@@ -4,14 +4,20 @@ import java.time.Instant;
 import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 @Service
 public class RequestLimiterService {
   private final Logger log = LoggerFactory.getLogger(getClass());
-  private static final long POINT_PER_MILLI = 60000L;
-  private static final long MAX_TRIES = 3;
+
+  @Value("${limiter.tries.max:5}")
+  private long maxTries;
+
+  @Value("${limiter.tries.ms:60000}")
+  private long pointPerMilli;
+
   private final ConcurrentHashMap<String, LimitRecord> requestStorage =
       new ConcurrentHashMap<>();
 
@@ -26,22 +32,18 @@ public class RequestLimiterService {
     if (requestStorage.containsKey(username)) {
       LimitRecord limitRecord = requestStorage.get(username);
 
-      // get difference from the last request to calc tries
       long diffMilli = getInstant().toEpochMilli()
           - limitRecord.lastRequestTime().toEpochMilli();
 
-      // calculate availible request, one request per minute, but no more than 3
-      long points = diffMilli / POINT_PER_MILLI;
-      long triesLeft = limitRecord.triesLeft() + points > MAX_TRIES ? MAX_TRIES
+      long points = diffMilli / pointPerMilli;
+      long triesLeft = limitRecord.triesLeft() + points > maxTries ? maxTries
           : limitRecord.triesLeft() + points;
 
       log.info("username {}, regenerate {}, tries before {}, after {}", username,
           points, limitRecord.triesLeft(), triesLeft);
 
       if (triesLeft > 0) {
-        // if tries left, remove one try and give access to make a request
         eligibleForRequest = true;
-        // remove one try
         triesLeft--;
 
         requestStorage.replace(username,
@@ -49,9 +51,7 @@ public class RequestLimiterService {
       }
     } else {
       log.info("create new limit record");
-      // if not exist add new record, and remove one try
-      requestStorage.put(username, new LimitRecord(MAX_TRIES - 1L, getInstant()));
-      // grant access to make a request
+      requestStorage.put(username, new LimitRecord(maxTries - 1L, getInstant()));
       eligibleForRequest = true;
     }
 

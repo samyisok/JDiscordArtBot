@@ -44,6 +44,12 @@ public class RequestLimiterServiceTest {
     ConcurrentHashMap<String, LimitRecord> requestStorage = new ConcurrentHashMap<>();
     ReflectionTestUtils.setField(requestLimiterService, "requestStorage",
         requestStorage);
+
+    ReflectionTestUtils.setField(requestLimiterService, "maxTries",
+        3L);
+
+    ReflectionTestUtils.setField(requestLimiterService, "pointPerMilli",
+        60000L);
   }
 
   @Test
