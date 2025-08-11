@@ -25,12 +25,13 @@ public class RequestLimiterService {
    * Update or Create record with tries and last access time, to calculate if user can
    * make a request.
    */
-  public boolean updateAndCheckIfItAboveLimit(MessageReceivedEvent event) {
+  public boolean updateAndCheckIfItAboveLimit(MessageReceivedEvent event, String executerName) {
     String username = event.getAuthor().getGlobalName();
+    String key = username + " " + executerName;
 
     boolean eligibleForRequest = false;
-    if (requestStorage.containsKey(username)) {
-      LimitRecord limitRecord = requestStorage.get(username);
+    if (requestStorage.containsKey(key)) {
+      LimitRecord limitRecord = requestStorage.get(key);
 
       long diffMilli = getInstant().toEpochMilli()
           - limitRecord.lastRequestTime().toEpochMilli();
@@ -39,19 +40,19 @@ public class RequestLimiterService {
       long triesLeft = limitRecord.triesLeft() + points > maxTries ? maxTries
           : limitRecord.triesLeft() + points;
 
-      log.info("username {}, regenerate {}, tries before {}, after {}", username,
+      log.info("username {}, regenerate {}, tries before {}, after {}", key,
           points, limitRecord.triesLeft(), triesLeft);
 
       if (triesLeft > 0) {
         eligibleForRequest = true;
         triesLeft--;
 
-        requestStorage.replace(username,
+        requestStorage.replace(key,
             new LimitRecord(triesLeft, getInstant()));
       }
     } else {
       log.info("create new limit record");
-      requestStorage.put(username, new LimitRecord(maxTries - 1L, getInstant()));
+      requestStorage.put(key, new LimitRecord(maxTries - 1L, getInstant()));
       eligibleForRequest = true;
     }
 

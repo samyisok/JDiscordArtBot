@@ -27,7 +27,6 @@ public class CommandProcessor extends ListenerAdapter {
 
     @Value("${command.prefix:%}")
     private String prefix;
-    
 
     public CommandProcessor(DefaultExecuterService defaultExecuterService,
             List<ExecuterGeneratorInterface> messageExecutersList,
@@ -77,15 +76,15 @@ public class CommandProcessor extends ListenerAdapter {
             return;
         }
 
-        if(!requestLimiterService.updateAndCheckIfItAboveLimit(event)) {
-              event.getMessage().addReaction(Emoji.fromUnicode("❌")).queue();
-              return;
-        }
-
         UUID uuid = UUID.randomUUID();
 
         log.info("Get event: {}, {}", uuid.toString(), content);
         ExecuterGeneratorInterface executor = getExecuter(content.substring(1));
+
+        if(!requestLimiterService.updateAndCheckIfItAboveLimit(event, executor.getClass().getSimpleName())) {
+              event.getMessage().addReaction(Emoji.fromUnicode("❌")).queue();
+              return;
+        }
 
         Thread.ofVirtual()
                 .name("onMessageReceived_"

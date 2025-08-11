@@ -35,6 +35,7 @@ public class RequestLimiterServiceTest {
   private MessageReceivedEvent event;
 
   private String username = MockJdaEvent.USER_NAME;
+  private String executerName = "TestExecuter";
 
 
   @BeforeEach
@@ -54,49 +55,46 @@ public class RequestLimiterServiceTest {
 
   @Test
   void testUpdateAndCheckIfItAboveLimit_NewUser() {
-    boolean result = requestLimiterService.updateAndCheckIfItAboveLimit(event);
+    boolean result = requestLimiterService.updateAndCheckIfItAboveLimit(event, executerName);
     ConcurrentHashMap<String, LimitRecord> storage =
         (ConcurrentHashMap<String, LimitRecord>) ReflectionTestUtils
             .getField(requestLimiterService, "requestStorage");
-    assertThat(storage.get(username).triesLeft()).isEqualTo(2l);
+    assertThat(storage.get(username + " " + executerName).triesLeft()).isEqualTo(2l);
     assertThat(result).isTrue();
   }
 
   @Test
   void testUpdateAndCheckIfItAboveLimit_WithinLimit() {
     ConcurrentHashMap<String, LimitRecord> requestStorage = new ConcurrentHashMap<>();
-    requestStorage.put(username, new LimitRecord(3l, oldInstant));
+    requestStorage.put(username + " " + executerName, new LimitRecord(3l, oldInstant));
     ReflectionTestUtils.setField(requestLimiterService, "requestStorage",
         requestStorage);
-    boolean result1 = requestLimiterService.updateAndCheckIfItAboveLimit(event);
+    boolean result1 = requestLimiterService.updateAndCheckIfItAboveLimit(event, executerName);
     ConcurrentHashMap<String, LimitRecord> storage1 =
         (ConcurrentHashMap<String, LimitRecord>) ReflectionTestUtils
             .getField(requestLimiterService, "requestStorage");
-    assertThat(storage1.get(username).triesLeft()).isEqualTo(2l);
+    assertThat(storage1.get(username + " " + executerName).triesLeft()).isEqualTo(2l);
     assertThat(result1).isTrue();
 
-    boolean result2 = requestLimiterService.updateAndCheckIfItAboveLimit(event);
+    boolean result2 = requestLimiterService.updateAndCheckIfItAboveLimit(event, executerName);
     ConcurrentHashMap<String, LimitRecord> storage2 =
         (ConcurrentHashMap<String, LimitRecord>) ReflectionTestUtils
             .getField(requestLimiterService, "requestStorage");
-    assertThat(storage2.get(username).triesLeft()).isEqualTo(1l);
-
+    assertThat(storage2.get(username + " " + executerName).triesLeft()).isEqualTo(1l);
     assertThat(result2).isTrue();
 
-    boolean result3 = requestLimiterService.updateAndCheckIfItAboveLimit(event);
+    boolean result3 = requestLimiterService.updateAndCheckIfItAboveLimit(event, executerName);
     ConcurrentHashMap<String, LimitRecord> storage3 =
         (ConcurrentHashMap<String, LimitRecord>) ReflectionTestUtils
             .getField(requestLimiterService, "requestStorage");
-    assertThat(storage3.get(username).triesLeft()).isEqualTo(0l);
-
+    assertThat(storage3.get(username + " " + executerName).triesLeft()).isEqualTo(0l);
     assertThat(result3).isTrue();
 
-    boolean result4 = requestLimiterService.updateAndCheckIfItAboveLimit(event);
+    boolean result4 = requestLimiterService.updateAndCheckIfItAboveLimit(event, executerName);
     ConcurrentHashMap<String, LimitRecord> storage4 =
         (ConcurrentHashMap<String, LimitRecord>) ReflectionTestUtils
             .getField(requestLimiterService, "requestStorage");
-    assertThat(storage4.get(username).triesLeft()).isEqualTo(0l);
-
+    assertThat(storage4.get(username + " " + executerName).triesLeft()).isEqualTo(0l);
     assertThat(result4).isFalse();
   }
 
@@ -107,16 +105,16 @@ public class RequestLimiterServiceTest {
 
     // Simulate user with zero tries left indirectly
     ConcurrentHashMap<String, LimitRecord> requestStorage = new ConcurrentHashMap<>();
-    requestStorage.put(username, new LimitRecord(0l, oldInstant));
+    requestStorage.put(username + " " + executerName, new LimitRecord(0l, oldInstant));
     ReflectionTestUtils.setField(requestLimiterService, "requestStorage",
         requestStorage);
 
-    boolean result = requestLimiterService.updateAndCheckIfItAboveLimit(event);
+    boolean result = requestLimiterService.updateAndCheckIfItAboveLimit(event, executerName);
 
     ConcurrentHashMap<String, LimitRecord> storage =
         (ConcurrentHashMap<String, LimitRecord>) ReflectionTestUtils
             .getField(requestLimiterService, "requestStorage");
-    assertThat(storage.get(username).triesLeft()).isEqualTo(0l);
+    assertThat(storage.get(username + " " + executerName).triesLeft()).isEqualTo(0l);
 
     // Assert that access is denied
     assertThat(result).isFalse();
@@ -129,18 +127,18 @@ public class RequestLimiterServiceTest {
 
     // Simulate user with zero tries left indirectly
     ConcurrentHashMap<String, LimitRecord> requestStorage = new ConcurrentHashMap<>();
-    requestStorage.put(username, new LimitRecord(0l, oldInstant));
+    requestStorage.put(username + " " + executerName, new LimitRecord(0l, oldInstant));
     ReflectionTestUtils.setField(requestLimiterService, "requestStorage",
         requestStorage);
 
-    boolean result = requestLimiterService.updateAndCheckIfItAboveLimit(event);
+    boolean result = requestLimiterService.updateAndCheckIfItAboveLimit(event, executerName);
 
     ConcurrentHashMap<String, LimitRecord> storage =
         (ConcurrentHashMap<String, LimitRecord>) ReflectionTestUtils
             .getField(requestLimiterService, "requestStorage");
-    assertThat(storage.get(username).triesLeft()).isEqualTo(1l);
+    assertThat(storage.get(username + " " + executerName).triesLeft()).isEqualTo(1l);
 
-    // Assert that access is denied
+    // Assert that access is allowed
     assertThat(result).isTrue();
   }
 }
