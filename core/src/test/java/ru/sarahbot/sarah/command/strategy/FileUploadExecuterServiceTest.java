@@ -136,7 +136,7 @@ public class FileUploadExecuterServiceTest {
     @Test
     void testGetDescriptionShouldReturnFormattedDescription() {
         String prefix = "%";
-        String expected = "%addhelp - Upload help image.";
+        String expected = "%addhelp - Upload help image.(supported files png, jpg, gif)";
 
         String result = fileUploadExecuterService.getDescription(prefix);
 

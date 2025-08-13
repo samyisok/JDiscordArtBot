@@ -23,7 +23,7 @@ import ru.sarahbot.sarah.file.service.FileService;
 public class FileUploadExecuterService implements ExecuterGeneratorInterface {
     private final Logger log = LoggerFactory.getLogger(getClass());
     private final FileService fileService;
-    private static final String DESCRIPTION = "Upload help image.";
+    private static final String DESCRIPTION = "Upload help image.(supported files png, jpg, gif)";
     private static final Set<String> MESSAGES = Set.of("addhelp");
 
     @Value("${validations.file.namesize.max:64}")

@@ -10,7 +10,7 @@ JDiscordArtBot is a Discord bot made for fun to use in art-themed servers.
   `%!`, `%эта`, `%эти`, `%это` — Get answers to questions.
 - **Help:**  
   `%help`, `%хелп`, `%херп` — Get a help image.  
-  `%addhelp` — Upload a help image.
+  `%addhelp` — Upload a help image, supported files png, jpg, gif.
 - **Ping:**  
   `%ping`, `%пинг` — Get a pong response from the bot.
 - **Anime & Waifu Generation:**  
@@ -91,6 +91,9 @@ Main config is in `core/src/main/resources/application.properties`. Key properti
 
 5. **Kubernetes:**
    - See `k8s/` for manifests and deployment scripts.
+
+6. **Docker:**
+   - See `./Dockerfile`
 
 ## Test Coverage (JaCoCo)
 
