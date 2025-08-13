@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import ru.sarahbot.sarah.file.service.WaifuCreatorService;
+import ru.sarahbot.sarah.waifu.WaifuCreatorService;
 
 @Service
 public class WaifuCreatorExecuterService implements ExecuterGeneratorInterface {

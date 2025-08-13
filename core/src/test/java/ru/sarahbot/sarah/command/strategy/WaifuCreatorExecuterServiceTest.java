@@ -16,7 +16,7 @@ import org.mockito.quality.Strictness;
 import ru.sarahbot.sarah.command.MockJdaEvent;
 import ru.sarahbot.sarah.command.MockJdaEvent.MockedEventContext;
 import ru.sarahbot.sarah.command.strategy.WaifuCreatorExecuterService;
-import ru.sarahbot.sarah.file.service.WaifuCreatorService;
+import ru.sarahbot.sarah.waifu.WaifuCreatorService;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)

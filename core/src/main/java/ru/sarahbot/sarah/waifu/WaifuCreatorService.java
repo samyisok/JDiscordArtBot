@@ -1,4 +1,4 @@
-package ru.sarahbot.sarah.file.service;
+package ru.sarahbot.sarah.waifu;
 
 import java.text.MessageFormat;
 import java.util.HashSet;

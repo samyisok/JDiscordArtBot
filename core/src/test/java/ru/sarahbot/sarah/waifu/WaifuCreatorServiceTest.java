@@ -1,4 +1,4 @@
-package ru.sarahbot.sarah.file.service;
+package ru.sarahbot.sarah.waifu;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -18,8 +18,8 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
-
-import ru.sarahbot.sarah.file.service.WaifuCreatorService.AgeGroup;
+import ru.sarahbot.sarah.waifu.WaifuCreatorService;
+import ru.sarahbot.sarah.waifu.WaifuCreatorService.AgeGroup;
 import ru.utils.name.RandomNameService;
 
 @SuppressWarnings("all")
