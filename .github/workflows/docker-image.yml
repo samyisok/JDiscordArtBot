@@ -35,4 +35,6 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         push: true
-        tags: ghcr.io/${{ github.actor }}/sarahbot:${{ steps.get_time.outputs.TIME }}
+        tags:
+          - ghcr.io/${{ github.actor }}/sarahbot:${{ steps.get_time.outputs.TIME }}
+          - ghcr.io/${{ github.actor }}/sarahbot:latest
